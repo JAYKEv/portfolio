@@ -77,8 +77,8 @@ export const site = {
     {
       title: "Web Clinic",
       description:
-        "Web-based clinic management system built with Go. High-performance backend service handling patient data, appointments, and medical records with efficient concurrency and scalability.",
-      tags: ["Go", "Backend", "Healthcare", "Web Service", "Concurrency"],
+        "Web-based clinic management system with high-performance backend service handling patient data, appointments, and medical records with efficient concurrency and scalability.",
+      tags: ["Backend", "Healthcare", "Web Service", "Concurrency", "Full Stack"],
       link: "https://github.com/JAYKEv/Web-Clinic-JK"
     },
     {

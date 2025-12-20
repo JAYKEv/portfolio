@@ -35,7 +35,6 @@ const defaultGridCategories: SkillCategory[] = [
     { name: 'TypeScript', icon: Braces, color: '#3178C6' }, 
     { name: 'Java', icon: Code2, color: '#E34F26' },
     { name: 'C', icon: Code2, color: '#A8B9CC' },
-    { name: 'Go', icon: Code2, color: '#00ADD8' },
   ]},
   { title: 'Frontend Development', skills: [
     { name: 'React', icon: Code2, color: '#61DAFB' }, 
@@ -65,6 +64,7 @@ const defaultGridCategories: SkillCategory[] = [
     { name: 'DAX', icon: Code2, color: '#F2C811' },
   ]},
   { title: 'Enterprise & Cloud', skills: [
+    { name: 'AWS', icon: Cloud, color: '#FF9900' },
     { name: 'Docker', icon: Box, color: '#2496ED' },
     { name: 'DevOps', icon: Cloud, color: '#00D9FF' },
     { name: 'Cloud Computing', icon: Cloud, color: '#00D9FF' },
