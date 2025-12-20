@@ -224,7 +224,7 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
           </div>
 
           {/* Responsibilities/Bullets */}
-          {item.bullets?.length ? (
+          {item.bullets && item.bullets.length > 0 ? (
             <div className="space-y-1">
               <div className="text-[#cccccc] mb-2">
                 <span className="text-[#4ec9b0]">const</span>
@@ -234,21 +234,18 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
               </div>
               {item.bullets.map((bullet, i) => (
                 <div 
-                  key={i}
+                  key={`${item.company}-bullet-${i}`}
                   className="flex items-start gap-2 ml-4 text-[#ce9178]"
+                  style={{ display: 'flex' }}
                 >
                   <span className="mt-0.5">"</span>
-                  <span className="flex-1 leading-relaxed">{bullet}</span>
+                  <span className="flex-1 leading-relaxed">{bullet || ''}</span>
                   <span>",</span>
                 </div>
               ))}
               <div className="text-[#cccccc]">];</div>
             </div>
-          ) : (
-            <div className="text-[#6a9955] italic">
-              <span></span>
-            </div>
-          )}
+          ) : null}
 
           {/* Hover Effect: Terminal-style prompt */}
           <div className={`mt-4 transition-all duration-300 ${
@@ -430,13 +427,20 @@ export default function ExperienceCards({
 
         {/* Experience Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {items.map((item, index) => (
-            <ExperienceCard 
-              key={`${item.company}-${item.role}-${item.start}`} 
-              item={item} 
-              index={index}
-            />
-          ))}
+          {(items || defaults).map((item, index) => {
+            // Ensure bullets exist
+            const itemWithBullets = {
+              ...item,
+              bullets: item.bullets || []
+            };
+            return (
+              <ExperienceCard 
+                key={`${item.company}-${item.role}-${item.start}-${index}`} 
+                item={itemWithBullets} 
+                index={index}
+              />
+            );
+          })}
         </div>
 
         {/* Education Section */}
