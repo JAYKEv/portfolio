@@ -235,15 +235,11 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
               {item.bullets.map((bullet, i) => (
                 <div 
                   key={i}
-                  className="flex items-start gap-2 ml-4 opacity-0 animate-in slide-in-from-left-4 fade-in"
-                  style={{ 
-                    animationDelay: `${(index * 200) + (i * 100)}ms`,
-                    animationFillMode: 'forwards'
-                  }}
+                  className="flex items-start gap-2 ml-4 text-[#ce9178]"
                 >
-                  <span className="text-[#ce9178] mt-0.5">"</span>
-                  <span className="text-[#ce9178] flex-1 leading-relaxed">{bullet}</span>
-                  <span className="text-[#ce9178]">",</span>
+                  <span className="mt-0.5">"</span>
+                  <span className="flex-1 leading-relaxed">{bullet}</span>
+                  <span>",</span>
                 </div>
               ))}
               <div className="text-[#cccccc]">];</div>
