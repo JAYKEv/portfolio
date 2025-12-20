@@ -26,6 +26,48 @@ export const site = {
       link: "https://github.com/JAYKEv/pizza-app-mern-microfrontend-ts"
     },
     {
+      title: "ClinicPulse",
+      description:
+        "Healthcare management system built with modern web technologies. Features patient management, appointment scheduling, and medical records tracking with a clean and intuitive user interface.",
+      tags: ["CSS", "HTML", "Web Development", "Healthcare", "Frontend"],
+      link: "https://github.com/JAYKEv/ClinicPulse-main"
+    },
+    {
+      title: "Library Management System",
+      description:
+        "Comprehensive library management application developed in Java. Handles book inventory, member management, borrowing/returning operations, and generates reports for efficient library operations.",
+      tags: ["Java", "Desktop Application", "Database", "OOP", "Swing"],
+      link: "https://github.com/JAYKEv/Library-Management-System-JK"
+    },
+    {
+      title: "Sales Report Dashboard - PowerBI",
+      description:
+        "Interactive business intelligence dashboard built with PowerBI for sales analytics and reporting. Visualizes sales trends, performance metrics, and generates actionable insights for data-driven decision making.",
+      tags: ["PowerBI", "Data Visualization", "Business Intelligence", "Analytics", "DAX"],
+      link: "https://github.com/JAYKEv/Sales_Report-PowerBI-JK"
+    },
+    {
+      title: "AI Document Summarizer",
+      description:
+        "Intelligent document summarization tool powered by AI and machine learning. Automatically extracts key information from documents, generates concise summaries, and helps users quickly understand lengthy content.",
+      tags: ["Python", "AI", "Machine Learning", "NLP", "Natural Language Processing"],
+      link: "https://github.com/JAYKEv/AI-Doc-Summarizer-JK"
+    },
+    {
+      title: "Cricket App",
+      description:
+        "Sports application for cricket enthusiasts featuring live scores, match statistics, player information, and team management. Built with TypeScript for type-safe development.",
+      tags: ["TypeScript", "Sports", "Mobile App", "React", "API Integration"],
+      link: "https://github.com/JAYKEv/Cricket_App"
+    },
+    {
+      title: "Distributed File System",
+      description:
+        "Distributed file system implementation in C providing file storage and retrieval across multiple nodes. Features replication, fault tolerance, and efficient data distribution algorithms.",
+      tags: ["C", "Distributed Systems", "File System", "Systems Programming", "Networking"],
+      link: "https://github.com/JAYKEv/Distributed-File-System"
+    },
+    {
       title: "Clade Collaborative Platform",
       description:
         "Real-time collaborative coding platform using Socket.io to synchronize multi-user sessions with 25% lower update latency. Developed backend services with Node.js and optimized MongoDB queries to ensure data consistency and scalability.",
@@ -38,27 +80,6 @@ export const site = {
         "Responsive cryptocurrency dashboard using React and third-party REST APIs for real-time market tracking. Improved load performance by 20% through optimized state management and efficient API polling strategies with structured error handling.",
       tags: ["React", "REST APIs", "State Management", "Responsive Design"],
       link: "https://github.com/JAYKEv/Cryptomaster"
-    },
-    {
-      title: "ClinicPulse",
-      description:
-        "Healthcare management system built with modern web technologies. Features patient management, appointment scheduling, and medical records tracking with a clean and intuitive user interface.",
-      tags: ["CSS", "Web Development", "Healthcare"],
-      link: "https://github.com/JAYKEv/ClinicPulse-main"
-    },
-    {
-      title: "Library Management System",
-      description:
-        "Comprehensive library management application developed in Java. Handles book inventory, member management, borrowing/returning operations, and generates reports for efficient library operations.",
-      tags: ["Java", "Desktop Application", "Database"],
-      link: "https://github.com/JAYKEv/Library-Management-System-JK"
-    },
-    {
-      title: "Sales Report Dashboard - PowerBI",
-      description:
-        "Interactive business intelligence dashboard built with PowerBI for sales analytics and reporting. Visualizes sales trends, performance metrics, and generates actionable insights for data-driven decision making.",
-      tags: ["PowerBI", "Data Visualization", "Business Intelligence", "Analytics"],
-      link: "https://github.com/JAYKEv/Sales_Report-PowerBI-JK"
     },
     {
       title: "Oracle APEX Application",

@@ -33,25 +33,49 @@ const defaultGridCategories: SkillCategory[] = [
     { name: 'Python', icon: Brain, color: '#3776AB' }, 
     { name: 'JavaScript', icon: Code2, color: '#F7DF1E' },
     { name: 'TypeScript', icon: Braces, color: '#3178C6' }, 
-    { name: 'Java', icon: Code2, color: '#E34F26' }, 
+    { name: 'Java', icon: Code2, color: '#E34F26' },
+    { name: 'C', icon: Code2, color: '#A8B9CC' },
+    { name: 'Go', icon: Code2, color: '#00ADD8' },
   ]},
-  { title: 'Frameworks', skills: [
+  { title: 'Frontend', skills: [
     { name: 'React', icon: Code2, color: '#61DAFB' }, 
+    { name: 'HTML', icon: Box, color: '#E34F26' },
+    { name: 'CSS', icon: Box, color: '#1572B6' },
+    { name: 'Responsive Design', icon: Cpu, color: '#4ECDC4' },
+  ]},
+  { title: 'Backend & Frameworks', skills: [
     { name: 'Node.js', icon: Server, color: '#339933' },
-    { name: 'Express.js', icon: Server, color: '#000000' }, 
+    { name: 'Express.js', icon: Server, color: '#000000' },
+    { name: 'Socket.io', icon: Server, color: '#010101' },
+    { name: 'REST APIs', icon: Code2, color: '#25D366' },
   ]},
   { title: 'Databases', skills: [
     { name: 'MongoDB', icon: Database, color: '#4DB33D' }, 
     { name: 'MySQL', icon: Database, color: '#336791' },
-    { name: 'SQL', icon: Database, color: '#336791' }, 
+    { name: 'SQL', icon: Database, color: '#336791' },
+  ]},
+  { title: 'Data & Analytics', skills: [
+    { name: 'PowerBI', icon: Database, color: '#F2C811' },
+    { name: 'Data Visualization', icon: Cpu, color: '#FF6B6B' },
+    { name: 'Business Intelligence', icon: Brain, color: '#4ECDC4' },
+  ]},
+  { title: 'Enterprise & Cloud', skills: [
+    { name: 'Oracle APEX', icon: Cloud, color: '#F80000' },
+    { name: 'Docker', icon: Box, color: '#2496ED' },
+    { name: 'DevOps', icon: Cloud, color: '#00D9FF' },
+  ]},
+  { title: 'AI & Machine Learning', skills: [
+    { name: 'AI/ML', icon: Brain, color: '#FF6F00' },
+    { name: 'NLP', icon: Brain, color: '#10A37F' },
+    { name: 'Natural Language Processing', icon: Brain, color: '#412991' },
   ]},
   { title: 'Tools & Concepts', skills: [
-    { name: 'Git', icon: GitBranch, color: '#F05032' }, 
-    { name: 'Docker', icon: Box, color: '#2496ED' },
-    { name: 'REST APIs', icon: Code2, color: '#25D366' }, 
+    { name: 'Git', icon: GitBranch, color: '#F05032' },
+    { name: 'Microfrontend', icon: Layers, color: '#764ABC' },
     { name: 'Object-Oriented Programming', icon: Code2, color: '#4ECDC4' },
-    { name: 'Agile', icon: Layers, color: '#FF6B6B' }, 
-    { name: 'DevOps', icon: Cloud, color: '#00D9FF' },
+    { name: 'Distributed Systems', icon: Server, color: '#00D9FF' },
+    { name: 'Agile', icon: Layers, color: '#FF6B6B' },
+    { name: 'Real-time Systems', icon: Zap, color: '#FFD23F' },
   ]},
   
 ];
