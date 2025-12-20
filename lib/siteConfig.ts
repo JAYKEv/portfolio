@@ -47,23 +47,16 @@ export const site = {
       link: "https://github.com/JAYKEv/Sales_Report-PowerBI-JK"
     },
     {
-      title: "AI Document Summarizer",
-      description:
-        "Intelligent document summarization tool powered by AI and machine learning. Automatically extracts key information from documents, generates concise summaries, and helps users quickly understand lengthy content.",
-      tags: ["Python", "AI", "Machine Learning", "NLP", "Natural Language Processing"],
-      link: "https://github.com/JAYKEv/AI-Doc-Summarizer-JK"
-    },
-    {
       title: "Cricket App",
       description:
-        "Sports application for cricket enthusiasts featuring live scores, match statistics, player information, and team management. Built with TypeScript for type-safe development.",
-      tags: ["TypeScript", "Sports", "Mobile App", "React", "API Integration"],
+        "Sports application for cricket enthusiasts featuring live scores, match statistics, player information, and team management. Built with TypeScript for type-safe development and React for responsive UI.",
+      tags: ["TypeScript", "React", "Sports", "API Integration", "State Management"],
       link: "https://github.com/JAYKEv/Cricket_App"
     },
     {
       title: "Distributed File System",
       description:
-        "Distributed file system implementation in C providing file storage and retrieval across multiple nodes. Features replication, fault tolerance, and efficient data distribution algorithms.",
+        "Distributed file system implementation in C providing file storage and retrieval across multiple nodes. Features replication, fault tolerance, and efficient data distribution algorithms for scalable storage solutions.",
       tags: ["C", "Distributed Systems", "File System", "Systems Programming", "Networking"],
       link: "https://github.com/JAYKEv/Distributed-File-System"
     },
@@ -78,43 +71,22 @@ export const site = {
       title: "Cryptomaster",
       description:
         "Responsive cryptocurrency dashboard using React and third-party REST APIs for real-time market tracking. Improved load performance by 20% through optimized state management and efficient API polling strategies with structured error handling.",
-      tags: ["React", "REST APIs", "State Management", "Responsive Design"],
+      tags: ["React", "REST APIs", "State Management", "Responsive Design", "JavaScript"],
       link: "https://github.com/JAYKEv/Cryptomaster"
     },
     {
       title: "Oracle APEX Application",
       description:
-        "Enterprise web application developed using Oracle APEX platform. Features rapid application development with built-in security, responsive design, and seamless database integration.",
-      tags: ["Oracle APEX", "Enterprise Application", "Database"],
+        "Enterprise web application developed using Oracle APEX platform. Features rapid application development with built-in security, responsive design, and seamless database integration for business solutions.",
+      tags: ["Oracle APEX", "Enterprise Application", "Database", "PL/SQL", "Web Development"],
       link: "https://github.com/JAYKEv/Oracle-Apex-JK"
-    },
-    {
-      title: "AI Document Summarizer",
-      description:
-        "Intelligent document summarization tool powered by AI and machine learning. Automatically extracts key information from documents, generates concise summaries, and helps users quickly understand lengthy content.",
-      tags: ["Python", "AI", "Machine Learning", "NLP"],
-      link: "https://github.com/JAYKEv/AI-Doc-Summarizer-JK"
     },
     {
       title: "Web Clinic",
       description:
         "Web-based clinic management system built with Go. High-performance backend service handling patient data, appointments, and medical records with efficient concurrency and scalability.",
-      tags: ["Go", "Backend", "Healthcare", "Web Service"],
+      tags: ["Go", "Backend", "Healthcare", "Web Service", "Concurrency"],
       link: "https://github.com/JAYKEv/Web-Clinic-JK"
-    },
-    {
-      title: "Cricket App",
-      description:
-        "Sports application for cricket enthusiasts featuring live scores, match statistics, player information, and team management. Built with TypeScript for type-safe development.",
-      tags: ["TypeScript", "Sports", "Mobile App", "React"],
-      link: "https://github.com/JAYKEv/Cricket_App"
-    },
-    {
-      title: "Distributed File System",
-      description:
-        "Distributed file system implementation in C providing file storage and retrieval across multiple nodes. Features replication, fault tolerance, and efficient data distribution algorithms.",
-      tags: ["C", "Distributed Systems", "File System", "Systems Programming"],
-      link: "https://github.com/JAYKEv/Distributed-File-System"
     },
     {
       title: "Visual Collaboration Platform",

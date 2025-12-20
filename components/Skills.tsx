@@ -37,17 +37,21 @@ const defaultGridCategories: SkillCategory[] = [
     { name: 'C', icon: Code2, color: '#A8B9CC' },
     { name: 'Go', icon: Code2, color: '#00ADD8' },
   ]},
-  { title: 'Frontend', skills: [
+  { title: 'Frontend Development', skills: [
     { name: 'React', icon: Code2, color: '#61DAFB' }, 
-    { name: 'HTML', icon: Box, color: '#E34F26' },
-    { name: 'CSS', icon: Box, color: '#1572B6' },
+    { name: 'HTML5', icon: Box, color: '#E34F26' },
+    { name: 'CSS3', icon: Box, color: '#1572B6' },
     { name: 'Responsive Design', icon: Cpu, color: '#4ECDC4' },
+    { name: 'UI/UX', icon: Layers, color: '#FF6B6B' },
+    { name: 'State Management', icon: Cpu, color: '#764ABC' },
   ]},
   { title: 'Backend & Frameworks', skills: [
     { name: 'Node.js', icon: Server, color: '#339933' },
     { name: 'Express.js', icon: Server, color: '#000000' },
     { name: 'Socket.io', icon: Server, color: '#010101' },
     { name: 'REST APIs', icon: Code2, color: '#25D366' },
+    { name: 'GraphQL', icon: Code2, color: '#E10098' },
+    { name: 'WebSockets', icon: Server, color: '#010101' },
   ]},
   { title: 'Databases', skills: [
     { name: 'MongoDB', icon: Database, color: '#4DB33D' }, 
@@ -58,16 +62,19 @@ const defaultGridCategories: SkillCategory[] = [
     { name: 'PowerBI', icon: Database, color: '#F2C811' },
     { name: 'Data Visualization', icon: Cpu, color: '#FF6B6B' },
     { name: 'Business Intelligence', icon: Brain, color: '#4ECDC4' },
+    { name: 'DAX', icon: Code2, color: '#F2C811' },
   ]},
   { title: 'Enterprise & Cloud', skills: [
     { name: 'Oracle APEX', icon: Cloud, color: '#F80000' },
     { name: 'Docker', icon: Box, color: '#2496ED' },
     { name: 'DevOps', icon: Cloud, color: '#00D9FF' },
+    { name: 'PL/SQL', icon: Database, color: '#F80000' },
   ]},
-  { title: 'AI & Machine Learning', skills: [
-    { name: 'AI/ML', icon: Brain, color: '#FF6F00' },
-    { name: 'NLP', icon: Brain, color: '#10A37F' },
-    { name: 'Natural Language Processing', icon: Brain, color: '#412991' },
+  { title: 'Software Engineering', skills: [
+    { name: 'System Design', icon: Layers, color: '#4ECDC4' },
+    { name: 'API Design', icon: Code2, color: '#25D366' },
+    { name: 'Microservices', icon: Server, color: '#339933' },
+    { name: 'Code Review', icon: GitBranch, color: '#F05032' },
   ]},
   { title: 'Tools & Concepts', skills: [
     { name: 'Git', icon: GitBranch, color: '#F05032' },
@@ -76,6 +83,8 @@ const defaultGridCategories: SkillCategory[] = [
     { name: 'Distributed Systems', icon: Server, color: '#00D9FF' },
     { name: 'Agile', icon: Layers, color: '#FF6B6B' },
     { name: 'Real-time Systems', icon: Zap, color: '#FFD23F' },
+    { name: 'Concurrency', icon: Cpu, color: '#00ADD8' },
+    { name: 'Testing', icon: FlaskConical, color: '#C21325' },
   ]},
   
 ];
