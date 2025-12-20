@@ -11,12 +11,21 @@ export default function Terminal(): JSX.Element {
 
   const aboutLines = useMemo(
     () => [
-      "I'm Jaykumar Kevadiya, a software engineer passionate about building scalable web applications and cloud-native solutions.",
-      "With expertise in React, Node.js, Python, and TypeScript, I specialize in developing full-stack applications with MongoDB and REST APIs.",
-      "I've improved system performance by 35% and reduced API latency by 45% through optimized backend services and database queries.",
+      "As a Software Developer specializing in scalable, data-driven web applications, I thrive on",
+      "transforming complex problems into robust and efficient code. With hands-on experience in Java,",
+      "React.js, Node.js, and MongoDB, I have delivered real-time collaboration tools, online",
+      "ordering systems, and big data-powered analytics platforms.",
       "",
-      "Currently pursuing my Master of Applied Computing at the University of Windsor, I'm always exploring new technologies",
-      "and contributing to open source projects that solve real-world problems.",
+      "I completed my Master of Applied Computing at the University of Windsor (Dec 2025), where I",
+      "deepened my expertise in full-stack development and data engineering.",
+      "",
+      "At Delta Tech-Up Ltd, I spearheaded a real-time web collaboration feature that boosted",
+      "client satisfaction by 30% and led initiatives that improved API performance by 25%.",
+      "I've improved system performance by 35% and reduced API latency by 45% through optimized",
+      "backend services and database queries.",
+      "",
+      "I am actively seeking a full-time job opportunity to apply my technical skills, collaborate",
+      "with forward-thinking teams, and contribute to innovative projects that have real impact.",
     ],
     []
   );

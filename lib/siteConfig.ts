@@ -8,7 +8,7 @@ export const site = {
   phone: "+1 (519)-990-3981",
   socials: {
     github: "https://github.com/JAYKEv",
-    linkedin: "https://www.linkedin.com/in/jaykumar-kevadiya-a43432190/",
+    linkedin: "https://www.linkedin.com/in/jay-kevadiya-a43432190/",
     x: ""
   },
   nav: [
