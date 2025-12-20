@@ -75,13 +75,6 @@ export const site = {
       link: "https://github.com/JAYKEv/Cryptomaster"
     },
     {
-      title: "Oracle APEX Application",
-      description:
-        "Enterprise web application developed using Oracle APEX platform. Features rapid application development with built-in security, responsive design, and seamless database integration for business solutions.",
-      tags: ["Oracle APEX", "Enterprise Application", "Database", "PL/SQL", "Web Development"],
-      link: "https://github.com/JAYKEv/Oracle-Apex-JK"
-    },
-    {
       title: "Web Clinic",
       description:
         "Web-based clinic management system built with Go. High-performance backend service handling patient data, appointments, and medical records with efficient concurrency and scalability.",

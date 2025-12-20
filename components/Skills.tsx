@@ -65,10 +65,9 @@ const defaultGridCategories: SkillCategory[] = [
     { name: 'DAX', icon: Code2, color: '#F2C811' },
   ]},
   { title: 'Enterprise & Cloud', skills: [
-    { name: 'Oracle APEX', icon: Cloud, color: '#F80000' },
     { name: 'Docker', icon: Box, color: '#2496ED' },
     { name: 'DevOps', icon: Cloud, color: '#00D9FF' },
-    { name: 'PL/SQL', icon: Database, color: '#F80000' },
+    { name: 'Cloud Computing', icon: Cloud, color: '#00D9FF' },
   ]},
   { title: 'Software Engineering', skills: [
     { name: 'System Design', icon: Layers, color: '#4ECDC4' },

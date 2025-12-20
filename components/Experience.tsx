@@ -63,7 +63,7 @@ const defaultEducation: EducationItem[] = [
     school: 'University of Windsor',
     degree: "Master of Applied Computing",
     start: 'Sep 2024',
-    end: 'Present',
+    end: 'Dec 2024',
     gpa: '',
     location: 'Ontario, Canada',
   },
