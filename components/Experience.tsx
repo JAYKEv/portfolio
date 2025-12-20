@@ -60,7 +60,7 @@ const defaults: ExperienceItem[] = [
       'Participated in design discussions and implemented UI/UX improvements based on user feedback and design specifications.'
     ],
   },
-];
+]; // Experience data with comprehensive responsibilities
 
 const defaultEducation: EducationItem[] = [
   {
