@@ -2,10 +2,13 @@ export const site = {
   name: "Jaykumar Kevadiya",
   role: "Software Engineer",
   summary:
-    "Passionate about building scalable web applications and cloud-native solutions with expertise in React, Node.js, and Python.",
+    "Software Engineer with experience building scalable backend systems, real-time applications, and full-stack products. Skilled in designing APIs, handling concurrency, optimizing performance, and delivering software used by hundreds of users. Experienced in distributed systems, real-time communication, and data-driven applications. Actively seeking Software Engineer roles focused on backend, systems, and product development.",
+  about: "Software Engineer with experience building scalable backend systems, real-time applications, and full-stack products. Skilled in designing APIs, handling concurrency, optimizing performance, and delivering software used by hundreds of users. Experienced in distributed systems, real-time communication, and data-driven applications. Actively seeking Software Engineer roles focused on backend, systems, and product development.",
+  leetcodeBadge: "LeetCode yearly badge for solving daily DSA problems.",
   location: "Ontario, Canada",
-  email: "kevadiyj@uwindsor.ca",
+  email: "jay.kevadiya.dev@gmail.com",
   phone: "+1 (519)-990-3981",
+  resume: "/resume.pdf", // Add your resume file path here
   socials: {
     github: "https://github.com/JAYKEv",
     linkedin: "https://www.linkedin.com/in/jay-kevadiya-a43432190/",
@@ -13,109 +16,104 @@ export const site = {
   },
   nav: [
     { href: "#about", label: "About" },
+    { href: "#experience", label: "Experience" },
     { href: "#projects", label: "Projects" },
+    { href: "#skills", label: "Skills" },
     { href: "#contact", label: "Contact" }
   ],
   
   projects: [
     {
-      title: "Pizza Ordering System",
+      title: "Clade – Real-Time Collaborative Platform",
       description:
-        "Full-stack ordering platform with secure REST APIs built using Node.js, implementing authentication and order workflows end-to-end. Optimized MongoDB schemas and queries resulting in 30% faster database response times supporting concurrent users and orders.",
-      tags: ["React", "Node.js", "MongoDB", "REST APIs", "TypeScript", "Microfrontend"],
-      link: "https://github.com/JAYKEv/pizza-app-mern-microfrontend-ts"
-    },
-    {
-      title: "ClinicPulse",
-      description:
-        "Healthcare management system built with modern web technologies. Features patient management, appointment scheduling, and medical records tracking with a clean and intuitive user interface.",
-      tags: ["CSS", "HTML", "Web Development", "Healthcare", "Frontend"],
-      link: "https://github.com/JAYKEv/ClinicPulse-main"
-    },
-    {
-      title: "Library Management System",
-      description:
-        "Comprehensive library management application developed in Java. Handles book inventory, member management, borrowing/returning operations, and generates reports for efficient library operations.",
-      tags: ["Java", "Desktop Application", "Database", "OOP", "Swing"],
-      link: "https://github.com/JAYKEv/Library-Management-System-JK"
-    },
-    {
-      title: "Sales Report Dashboard - PowerBI",
-      description:
-        "Interactive business intelligence dashboard built with PowerBI for sales analytics and reporting. Visualizes sales trends, performance metrics, and generates actionable insights for data-driven decision making.",
-      tags: ["PowerBI", "Data Visualization", "Business Intelligence", "Analytics", "DAX"],
-      link: "https://github.com/JAYKEv/Sales_Report-PowerBI-JK"
-    },
-    {
-      title: "Cricket App",
-      description:
-        "Sports application for cricket enthusiasts featuring live scores, match statistics, player information, and team management. Built with TypeScript for type-safe development and React for responsive UI.",
-      tags: ["TypeScript", "React", "Sports", "API Integration", "State Management"],
-      link: "https://github.com/JAYKEv/Cricket_App"
+        "Built a real-time collaborative coding platform allowing multiple users to edit shared documents simultaneously using WebSockets and operational transformation. Reduced update latency by 25% and supported 100+ concurrent sessions with sub-100ms response times. Optimized MongoDB queries and backend state handling for conflict-free concurrent edits.",
+      tags: ["WebSockets", "Node.js", "MongoDB", "Real-time", "Concurrency"],
+      github: "https://github.com/JAYKEv/Clade",
+      link: "https://github.com/JAYKEv/Clade",
+      bullets: [
+        "Designed and implemented real-time document synchronization system solving multi-user editing conflicts, achieving 25% latency reduction",
+        "Optimized MongoDB queries and WebSocket message handling to support 100+ concurrent sessions with sub-100ms response times",
+        "Implemented operational transformation algorithms for conflict-free concurrent edits, ensuring data consistency across distributed sessions"
+      ]
     },
     {
       title: "Distributed File System",
       description:
-        "Distributed file system implementation in C providing file storage and retrieval across multiple nodes. Features replication, fault tolerance, and efficient data distribution algorithms for scalable storage solutions.",
-      tags: ["C", "Distributed Systems", "File System", "Systems Programming", "Networking"],
-      link: "https://github.com/JAYKEv/Distributed-File-System"
+        "Designed and implemented a distributed file system in C solving data storage and retrieval across multiple nodes, achieving fault tolerance and efficient data distribution. Features replication, networking protocols, and scalable storage algorithms for production-level distributed systems.",
+      tags: ["C", "Networking", "Distributed Systems", "Systems Programming"],
+      github: "https://github.com/JAYKEv/Distributed-File-System",
+      link: "https://github.com/JAYKEv/Distributed-File-System",
+      bullets: [
+        "Designed and implemented distributed file storage system solving data consistency across nodes, achieving fault tolerance and replication",
+        "Built networking protocols and message passing mechanisms for inter-node communication, handling concurrent read/write operations",
+        "Implemented efficient data distribution algorithms supporting scalable storage solutions for production-level distributed systems"
+      ]
     },
     {
-      title: "Clade Collaborative Platform",
+      title: "Web Clinic – High-Concurrency Backend",
       description:
-        "Real-time collaborative coding platform using Socket.io to synchronize multi-user sessions with 25% lower update latency. Developed backend services with Node.js and optimized MongoDB queries to ensure data consistency and scalability.",
-      tags: ["React", "Node.js", "Socket.io", "MongoDB", "Real-time", "Object-Oriented Programming"],
-      link: "https://github.com/JAYKEv/Clade"
+        "Built a high-concurrency backend system for healthcare management handling patient data, appointments, and medical records. Designed REST APIs with optimized database queries, supporting hundreds of concurrent users with efficient request handling and data consistency.",
+      tags: ["Node.js", "REST APIs", "MongoDB", "Concurrency", "Backend"],
+      github: "https://github.com/JAYKEv/Web-Clinic-JK",
+      link: "https://github.com/JAYKEv/Web-Clinic-JK",
+      bullets: [
+        "Designed and implemented high-concurrency backend system solving healthcare data management, achieving support for hundreds of concurrent users",
+        "Optimized REST API endpoints and MongoDB queries for patient data, appointments, and medical records with efficient request handling",
+        "Implemented concurrency control mechanisms ensuring data consistency and performance under high load conditions"
+      ]
     },
     {
-      title: "Cryptomaster",
+      title: "Pizza Ordering System – Full-Stack Product",
       description:
-        "Responsive cryptocurrency dashboard using React and third-party REST APIs for real-time market tracking. Improved load performance by 20% through optimized state management and efficient API polling strategies with structured error handling.",
-      tags: ["React", "REST APIs", "State Management", "Responsive Design", "JavaScript"],
-      link: "https://github.com/JAYKEv/Cryptomaster"
+        "Developed a full-stack ordering platform with secure REST APIs, authentication, and order workflows. Optimized MongoDB schemas and queries resulting in 30% faster database response times, supporting concurrent users and orders with end-to-end product delivery.",
+      tags: ["React", "Node.js", "MongoDB", "Microfrontend", "Full-Stack"],
+      github: "https://github.com/JAYKEv/pizza-app-mern-microfrontend-ts",
+      link: "https://github.com/JAYKEv/pizza-app-mern-microfrontend-ts",
+      bullets: [
+        "Designed and implemented full-stack ordering platform solving order management workflows, achieving 30% faster database response times",
+        "Built secure REST APIs with authentication and authorization, supporting concurrent users and orders with optimized MongoDB schemas",
+        "Developed microfrontend architecture enabling scalable frontend deployment and independent feature development"
+      ]
     },
     {
-      title: "Web Clinic",
+      title: "IdentityGuard-Service",
       description:
-        "Web-based clinic management system with high-performance backend service handling patient data, appointments, and medical records with efficient concurrency and scalability.",
-      tags: ["Backend", "Healthcare", "Web Service", "Concurrency", "Full Stack"],
-      link: "https://github.com/JAYKEv/Web-Clinic-JK"
+        "Built a production-ready authentication and authorization service using Node.js, TypeScript, and Express. Implemented JWT-based authentication, RBAC (Role-Based Access Control), and Docker containerization, delivering secure identity management for distributed applications.",
+      tags: ["Node.js", "TypeScript", "JWT", "Express", "Docker", "Authentication", "RBAC"],
+      github: "https://github.com/JAYKEv",
+      link: "https://github.com/JAYKEv",
+      bullets: [
+        "Designed and implemented authentication service solving identity management for distributed applications, achieving secure JWT-based token handling",
+        "Built RBAC system with Express.js middleware, enabling fine-grained access control and role-based permissions",
+        "Containerized service with Docker for production deployment, ensuring scalability and consistent deployment across environments"
+      ]
     },
     {
-      title: "Visual Collaboration Platform",
+      title: "SecureAuth-Portal",
       description:
-        "Real-time visual collaboration tool enabling teams to work together on shared canvases. Features drawing tools, real-time synchronization, and multi-user support for creative collaboration.",
-      tags: ["JavaScript", "Real-time", "Collaboration", "WebSocket"],
-      link: "https://github.com/JAYKEv/Visual-Collaboration-Platform"
+        "Developed a full-stack authentication portal with React frontend and Node.js backend. Implemented secure login flows, JWT token management, and Docker containerization, providing a complete authentication solution with modern UI/UX.",
+      tags: ["React", "Node.js", "TypeScript", "Express", "JWT", "Docker", "Full-Stack", "Authentication"],
+      github: "https://github.com/JAYKEv",
+      link: "https://github.com/JAYKEv",
+      bullets: [
+        "Designed and implemented full-stack authentication portal solving secure user access management, achieving seamless login flows with JWT",
+        "Built React frontend with TypeScript for type-safe authentication UI, integrated with Express.js backend for secure token handling",
+        "Containerized application with Docker enabling production-ready deployment with consistent environment configuration"
+      ]
     },
     {
-      title: "InstaEats",
+      title: "AuthCore-Service",
       description:
-        "Food delivery and restaurant management platform. Features menu browsing, order placement, payment processing, and restaurant dashboard for managing orders and inventory.",
-      tags: ["JavaScript", "Food Delivery", "E-commerce", "Full Stack"],
-      link: "https://github.com/JAYKEv/InstaEats"
-    },
-    {
-      title: "Code4Share",
-      description:
-        "Code sharing and collaboration platform for developers. Share code snippets, collaborate on projects, and discover useful code examples from the community.",
-      tags: ["JavaScript", "Code Sharing", "Developer Tools", "Community"],
-      link: "https://github.com/JAYKEv/Code4Share-6851cdfa7cad57c47c7ad7afb63befb16659b2cf"
-    },
-    {
-      title: "Authentication System",
-      description:
-        "Secure authentication and login system with user registration, login, password management, and session handling. Implements best practices for security and user experience.",
-      tags: ["JavaScript", "Authentication", "Security", "User Management"],
-      link: "https://github.com/JAYKEv/login2"
-    },
-    {
-      title: "Netflix Clone",
-      description:
-        "Streaming platform clone inspired by Netflix. Features video playback, user profiles, content recommendations, and a modern responsive UI built with React and CSS.",
-      tags: ["React", "CSS", "Streaming", "Frontend", "Entertainment"],
-      link: "https://github.com/JAYKEv/React1"
-    },
+        "Core authentication service built with Node.js, TypeScript, Express, JWT, and Docker. Provides reusable authentication infrastructure for microservices architecture with secure token generation and validation.",
+      tags: ["Node.js", "TypeScript", "JWT", "Express", "Docker"],
+      github: "https://github.com/JAYKEv",
+      link: "https://github.com/JAYKEv",
+      bullets: [
+        "Designed and implemented core authentication service solving reusable identity infrastructure, achieving secure token generation and validation",
+        "Built with TypeScript and Express.js for type-safe API development, supporting microservices architecture",
+        "Containerized with Docker for scalable deployment, enabling consistent authentication across distributed systems"
+      ]
+    }
   ]
 };
 
