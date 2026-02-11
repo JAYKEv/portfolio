@@ -39,11 +39,11 @@ const defaults: ExperienceItem[] = [
     start: 'Jan 2023',
     end: 'Jun 2024',
     bullets: [
-      'Designed and implemented scalable backend services solving performance bottlenecks in distributed environments, achieving 35% system performance improvement through optimized API workflows and reduced redundant data processing.',
-      'Designed and implemented optimized REST and GraphQL APIs solving high-latency issues, achieving 45% API latency reduction through MongoDB query optimization and supporting high-throughput transaction systems.',
-      'Designed and implemented security infrastructure solving access control challenges, achieving enhanced reliability through structured logging, role-based access control, and automated testing aligned with DevOps practices.',
-      'Designed and implemented full-stack web applications solving integration challenges, achieving seamless frontend-backend integration using React, Node.js, and MongoDB for production-level systems.',
-      'Designed and implemented Agile development workflows solving delivery inefficiencies, achieving high-quality software solutions through cross-functional collaboration, sprint planning, and continuous improvement processes.'
+      'Improved system performance by 35% by designing scalable backend services using Node.js and Python, optimizing API workflows and reducing redundant data processing in distributed environments.',
+      'Reduced API latency by 45% by refactoring GraphQL and REST APIs and optimizing MongoDB queries, supporting high-throughput transaction and analytics systems.',
+      'Enhanced reliability and security by implementing structured logging, role-based access control, and automated testing aligned with modern software development and DevOps practices.',
+      'Developed and maintained full-stack web applications using React, Node.js, and MongoDB, ensuring seamless integration between frontend and backend systems.',
+      'Collaborated with cross-functional teams in Agile environments to deliver high-quality software solutions, participating in sprint planning, daily standups, and retrospective meetings.'
     ],
   },
   {
@@ -53,14 +53,14 @@ const defaults: ExperienceItem[] = [
     start: 'May 2022',
     end: 'Jul 2022',
     bullets: [
-      'Designed and implemented real-time collaboration features solving communication latency issues, achieving 30% efficiency improvement through React UIs and low-latency WebSocket communication.',
-      'Designed and implemented reusable component library solving code duplication, achieving accelerated feature delivery across multiple client-facing applications through component reusability and unit testing.',
-      'Designed and implemented version control workflows solving deployment inconsistencies, achieving stable releases through Git-based code reviews and Agile deployment cycles.',
-      'Designed and implemented responsive web interfaces solving cross-browser compatibility issues, achieving optimal user experience across devices using React, HTML5, CSS3, and JavaScript.',
-      'Designed and implemented UI/UX improvements solving user experience gaps, achieving enhanced usability through design discussions and user feedback integration.'
+      'Increased real-time collaboration efficiency by 30% by building interactive UIs with React and implementing low-latency communication using WebSockets.',
+      'Improved code quality by creating reusable components and performing unit testing, accelerating feature delivery across multiple client-facing applications.',
+      'Collaborated in Agile sprints, code reviews, and deployment cycles using Git, contributing to stable and maintainable frontend releases.',
+      'Developed responsive web interfaces using React, HTML5, CSS3, and JavaScript, ensuring cross-browser compatibility and optimal user experience.',
+      'Participated in design discussions and implemented UI/UX improvements based on user feedback and design specifications.'
     ],
   },
-]; // Experience data with impact-focused format
+]; // Experience data with comprehensive responsibilities
 
 const defaultEducation: EducationItem[] = [
   {

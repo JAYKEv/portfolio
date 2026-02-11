@@ -11,14 +11,21 @@ export default function Terminal(): JSX.Element {
 
   const aboutLines = useMemo(
     () => [
-      "Software Engineer with experience building scalable backend systems, real-time applications,",
-      "and full-stack products. Skilled in designing APIs, handling concurrency, optimizing",
-      "performance, and delivering software used by hundreds of users. Experienced in distributed",
-      "systems, real-time communication, and data-driven applications.",
+      "As a Software Developer specializing in scalable, data-driven web applications, I thrive on",
+      "transforming complex problems into robust and efficient code. With hands-on experience in Java,",
+      "React.js, Node.js, and MongoDB, I have delivered real-time collaboration tools, online",
+      "ordering systems, and big data-powered analytics platforms.",
       "",
-      "Actively seeking Software Engineer roles focused on backend, systems, and product development.",
+      "I completed my Master of Applied Computing at the University of Windsor (Dec 2025), where I",
+      "deepened my expertise in full-stack development and data engineering.",
       "",
-      "🏆 LeetCode yearly badge for solving daily DSA problems.",
+      "At Delta Tech-Up Ltd, I spearheaded a real-time web collaboration feature that boosted",
+      "client satisfaction by 30% and led initiatives that improved API performance by 25%.",
+      "I've improved system performance by 35% and reduced API latency by 45% through optimized",
+      "backend services and database queries.",
+      "",
+      "I am actively seeking a full-time job opportunity to apply my technical skills, collaborate",
+      "with forward-thinking teams, and contribute to innovative projects that have real impact.",
     ],
     []
   );

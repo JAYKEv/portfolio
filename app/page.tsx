@@ -2,7 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Footer } from "@/components/Footer";
 import { site } from "@/lib/siteConfig";
-import { Github, Linkedin, Mail, MapPin, Download, Award } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import Terminal from "@/components/Terminal";
 import Skills from '@/components/Skills';
 import ExperienceSection from '@/components/Experience';
@@ -13,162 +13,51 @@ export default function Home() {
     <div className="min-h-screen bg-white text-gray-900">
       <Navbar />
 
-      {/* Hero / About Section */}
-      <section id="about" className="pt-32 pb-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-              {site.name}
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-4 font-medium">
-              {site.role}
-            </p>
-            <div className="flex items-center justify-center gap-4 text-gray-500 flex-wrap mb-6">
+      {/* Hero Section */}
+      <section className="pt-32 pb-10 px-4">{/* reduced bottom padding */}
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+            {site.name}
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 mb-4 font-medium">
+            {site.role}
+          </p>
+          <div className="flex items-center justify-center gap-4 text-gray-500 flex-wrap">
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4" />
+              <span>{site.location}</span>
+            </div>
+            {site.phone && (
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                <span>{site.location}</span>
+                <Phone className="w-4 h-4" />
+                <span>{site.phone}</span>
               </div>
-            </div>
-            
-            {/* Social Links & Resume */}
-            <div className="flex items-center justify-center gap-4 flex-wrap mb-8">
-              {site.socials.github && (
-                <a
-                  href={site.socials.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors text-gray-700"
-                >
-                  <Github className="w-5 h-5" />
-                  <span>GitHub</span>
-                </a>
-              )}
-              {site.socials.linkedin && (
-                <a
-                  href={site.socials.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors text-gray-700"
-                >
-                  <Linkedin className="w-5 h-5" />
-                  <span>LinkedIn</span>
-                </a>
-              )}
-              {site.resume && (
-                <a
-                  href={site.resume}
-                  download
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition-colors"
-                >
-                  <Download className="w-5 h-5" />
-                  <span>Resume</span>
-                </a>
-              )}
-            </div>
-
-            {/* LeetCode Badge Highlight */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-50 border border-yellow-200 text-yellow-800">
-              <Award className="w-5 h-5" />
-              <span className="font-medium">{site.leetcodeBadge}</span>
-            </div>
-          </div>
-
-          {/* About Paragraph */}
-          <div className="max-w-3xl mx-auto mt-12">
-            <p className="text-lg text-gray-700 leading-relaxed text-center">
-              {site.about}
-            </p>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Terminal Section (Optional - can be removed or kept) */}
-      <section className="px-4 pt-0 pb-12">
+      {/* Terminal Section */}
+      <section className="px-4 pt-0 pb-12">{/* no extra top space */}
         <div className="max-w-4xl mx-auto">
           <Terminal />
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section id="experience" className="py-20 px-4 bg-gray-50">
-        <ExperienceSection />
-      </section>
+      <ExperienceSection />
+
+      <Skills layout="grid" />
 
       {/* Projects Section */}
       <section id="projects" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold mb-4 text-center text-gray-900">Featured Projects</h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Production-level projects showcasing backend, full-stack, systems, and security engineering.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <h2 className="text-3xl font-bold mb-12 text-center">Featured Projects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {site.projects.map((project, index) => (
-              <div key={index} className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-2xl font-bold text-gray-900">{project.title}</h3>
-                  <div className="flex items-center gap-2">
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
-                        aria-label={`View ${project.title} on GitHub`}
-                      >
-                        <Github className="w-5 h-5" />
-                      </a>
-                    )}
-                    {project.link && project.link !== project.github && (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
-                        aria-label={`View ${project.title}`}
-                      >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </a>
-                    )}
-                  </div>
-                </div>
-                
-                {/* Tech Stack Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-sm font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Description */}
-                <p className="text-gray-700 mb-4 leading-relaxed">{project.description}</p>
-
-                {/* Bullets if available */}
-                {project.bullets && project.bullets.length > 0 && (
-                  <ul className="space-y-2 mt-4">
-                    {project.bullets.map((bullet, i) => (
-                      <li key={i} className="flex items-start gap-2 text-gray-600 text-sm">
-                        <span className="text-gray-400 mt-1">•</span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+              <ProjectCard key={index} project={project} />
             ))}
           </div>
         </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-4 bg-gray-50">
-        <Skills layout="grid" />
       </section>
 {/* Enhanced Contact Section (Mac-themed, simplified) */}
 <section id="contact" className="py-24 px-4 relative overflow-hidden">
