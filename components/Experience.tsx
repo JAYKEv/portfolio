@@ -232,17 +232,30 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
                 <span className="text-[#9cdcfe]">responsibilities</span>
                 <span className="text-[#cccccc]"> = [</span>
               </div>
-              {item.bullets.map((bullet, i) => (
-                <div 
-                  key={`${item.company}-bullet-${i}`}
-                  className="flex items-start gap-2 ml-4 text-[#ce9178]"
-                  style={{ display: 'flex' }}
-                >
-                  <span className="mt-0.5">"</span>
-                  <span className="flex-1 leading-relaxed">{bullet || ''}</span>
-                  <span>",</span>
-                </div>
-              ))}
+              {item.bullets.map((bullet, i) => {
+                // Highlight metrics (percentages, numbers with +, sub-Xms)
+                const parts = bullet.split(/(\d+%|\d+\+|sub-\d+ms)/g);
+                
+                return (
+                  <div 
+                    key={`${item.company}-bullet-${i}`}
+                    className="flex items-start gap-2 ml-4 text-[#ce9178]"
+                    style={{ display: 'flex' }}
+                  >
+                    <span className="mt-0.5">"</span>
+                    <span className="flex-1 leading-relaxed">
+                      {parts.map((part, idx) => 
+                        /^\d+%$|^\d+\+$|^sub-\d+ms$/.test(part) ? (
+                          <strong key={idx} className="text-[#4ec9b0] font-bold">{part}</strong>
+                        ) : (
+                          <span key={idx}>{part}</span>
+                        )
+                      )}
+                    </span>
+                    <span>",</span>
+                  </div>
+                );
+              })}
               <div className="text-[#cccccc]">];</div>
             </div>
           ) : null}

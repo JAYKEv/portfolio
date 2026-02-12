@@ -603,7 +603,7 @@ function SectionHeader() {
       <motion.h2
         className="text-4xl lg:text-5xl font-bold tracking-tight mb-4 relative z-10"
         style={{
-          background: 'linear-gradient(135deg, #111 0%, #555 50%, #888 100%)',
+          background: 'linear-gradient(135deg, #1F6FEB 0%, #2D2D2D 50%, #1F6FEB 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',

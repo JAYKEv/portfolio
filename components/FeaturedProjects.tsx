@@ -45,8 +45,10 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -4, scale: 1.02 }}
               className="group relative bg-white border border-gray-200 rounded-xl p-6
-                         hover:border-gray-300 hover:shadow-lg transition-all duration-300"
+                         hover:border-blue-300 hover:shadow-xl transition-all duration-300
+                         hover:bg-gradient-to-br hover:from-white hover:to-blue-50/30"
             >
               {/* Header */}
               <div className="flex items-start justify-between mb-4">
@@ -97,12 +99,25 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
 
               {/* Bullets */}
               <ul className="space-y-2 mb-4">
-                {project.bullets.map((bullet, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                    <span className="text-blue-600 mt-1.5">•</span>
-                    <span className="leading-relaxed">{bullet}</span>
-                  </li>
-                ))}
+                {project.bullets.map((bullet, i) => {
+                  // Highlight metrics (percentages, numbers with +, sub-Xms)
+                  const parts = bullet.split(/(\d+%|\d+\+|sub-\d+ms)/g);
+                  
+                  return (
+                    <li key={i} className="flex items-start gap-2 text-sm text-gray-600 group-hover:text-gray-700 transition-colors">
+                      <span className="text-blue-600 mt-1.5 font-bold">•</span>
+                      <span className="leading-relaxed">
+                        {parts.map((part, idx) => 
+                          /^\d+%$|^\d+\+$|^sub-\d+ms$/.test(part) ? (
+                            <strong key={idx} className="text-[#F5A623] font-bold">{part}</strong>
+                          ) : (
+                            <span key={idx}>{part}</span>
+                          )
+                        )}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
 
               {/* Tags */}

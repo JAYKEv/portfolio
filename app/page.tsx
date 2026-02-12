@@ -31,62 +31,66 @@ export default function Home() {
           </div>
 
           {/* About Text */}
-          <div className="prose prose-lg max-w-none text-center mb-8">
-            <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+          <div className="prose prose-lg max-w-none text-center mb-6">
+            <p className="text-gray-700 leading-relaxed">
               {site.summary}
             </p>
           </div>
 
-          {/* Social Links */}
+          {/* Badge */}
+          {site.badge && (
+            <div className="text-center mb-8">
+              <p className="text-gray-600 text-lg font-medium">
+                {site.badge}
+              </p>
+            </div>
+          )}
+
+          {/* Action Buttons with Premium Styling */}
           <div className="flex items-center justify-center gap-4 flex-wrap">
-            <a
-              href={`mailto:${site.email}`}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-lg
-                         hover:bg-gray-800 transition-all duration-200"
-            >
-              <Mail className="w-5 h-5" />
-              <span>Email</span>
-            </a>
-            {site.socials.linkedin && (
+            {site.resume ? (
               <a
-                href={site.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg
-                           hover:bg-blue-700 transition-all duration-200"
+                href={site.resume}
+                download
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#1F6FEB] text-white rounded-lg
+                           font-semibold shadow-lg hover:bg-[#1a5fd9] hover:shadow-xl
+                           hover:scale-105 transition-all duration-300"
               >
-                <Linkedin className="w-5 h-5" />
-                <span>LinkedIn</span>
+                <Download className="w-5 h-5" />
+                <span>Resume</span>
               </a>
+            ) : (
+              <span className="inline-flex items-center gap-2 px-8 py-3.5 bg-gray-400 text-white rounded-lg
+                             cursor-not-allowed opacity-75 font-semibold">
+                <Download className="w-5 h-5" />
+                <span>Resume [Download PDF]</span>
+              </span>
             )}
             {site.socials.github && (
               <a
                 href={site.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-800 text-white rounded-lg
-                           hover:bg-gray-700 transition-all duration-200"
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-gray-900 rounded-lg
+                           font-semibold border-2 border-gray-300 shadow-md hover:border-gray-400
+                           hover:shadow-lg hover:scale-105 transition-all duration-300"
               >
                 <Github className="w-5 h-5" />
                 <span>GitHub</span>
               </a>
             )}
-            {site.resume ? (
+            {site.socials.linkedin && (
               <a
-                href={site.resume}
-                download
-                className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg
-                           hover:bg-green-700 transition-all duration-200"
+                href={site.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-gray-900 rounded-lg
+                           font-semibold border-2 border-gray-300 shadow-md hover:border-gray-400
+                           hover:shadow-lg hover:scale-105 transition-all duration-300"
               >
-                <Download className="w-5 h-5" />
-                <span>Resume</span>
+                <Linkedin className="w-5 h-5" />
+                <span>LinkedIn</span>
               </a>
-            ) : (
-              <span className="inline-flex items-center gap-2 px-6 py-3 bg-gray-400 text-white rounded-lg
-                             cursor-not-allowed opacity-75">
-                <Download className="w-5 h-5" />
-                <span>Resume [Download PDF]</span>
-              </span>
             )}
           </div>
         </div>

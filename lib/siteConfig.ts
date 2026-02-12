@@ -1,7 +1,8 @@
 export const site = {
   name: "Jaykumar Kevadiya",
   role: "Software Engineer — Full-Stack & Backend (React, Node.js, Python)",
-  summary: "I build scalable backend systems, full-stack applications, and real-time platforms. Skilled in designing APIs, handling concurrency, optimizing performance, and delivering software used by hundreds of users. Experienced in distributed systems, networking, real-time communication, and security-focused applications. Actively seeking Software Engineer roles focused on backend, systems, and full-stack development.\n\n🏅 LeetCode yearly badge for solving daily DSA problems.",
+  summary: "I build scalable backend systems, full-stack applications, and real-time platforms. Skilled in designing APIs, handling concurrency, optimizing performance, and delivering software used by hundreds of users. Experienced in distributed systems, networking, real-time communication, and security-focused applications. Actively seeking Software Engineer roles focused on backend, systems, and full-stack development.",
+  badge: "🏅 LeetCode yearly badge for solving daily DSA problems",
   location: "Toronto, ON",
   email: "jay.kevadiya.dev@gmail.com",
   phone: "+1 (519)-990-3981",
@@ -107,7 +108,7 @@ export const site = {
       link: "https://github.com/JAYKEv/SecureAuth-Portal"
     },
     {
-      title: "AuthCore-Service",
+      title: "AuthCore-Service (GitHub only)",
       description: "Backend authentication and authorization with JWT, refresh token rotation, RBAC, and rate limiting.",
       bullets: [
         "Built backend authentication and authorization with JWT, refresh token rotation, RBAC, and rate limiting.",
