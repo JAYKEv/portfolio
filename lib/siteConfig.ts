@@ -107,7 +107,7 @@ export const site = {
       link: "https://github.com/JAYKEv/SecureAuth-Portal"
     },
     {
-      title: "AuthCore-Service (GitHub only)",
+      title: "AuthCore-Service",
       description: "Backend authentication and authorization with JWT, refresh token rotation, RBAC, and rate limiting.",
       bullets: [
         "Built backend authentication and authorization with JWT, refresh token rotation, RBAC, and rate limiting.",
