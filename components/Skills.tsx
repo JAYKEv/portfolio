@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import {
   Code2, Box, Cloud, Cpu, Server, Database, Layers, Braces, GitBranch, Brain, FlaskConical,
-  Sparkles, Zap, Star, Rocket
+  Sparkles, Zap, Star, Rocket, Terminal
 } from 'lucide-react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 
@@ -26,66 +26,41 @@ interface SkillsProps {
 }
 
 /* ----------------------------------------------------------------------------
-  Defaults with enhanced colors
+  Defaults with enhanced colors - Primary and Secondary Skills
 ---------------------------------------------------------------------------- */
 const defaultGridCategories: SkillCategory[] = [
-  { title: 'Languages', skills: [
-    { name: 'Python', icon: Brain, color: '#3776AB' }, 
-    { name: 'JavaScript', icon: Code2, color: '#F7DF1E' },
-    { name: 'TypeScript', icon: Braces, color: '#3178C6' }, 
-    { name: 'Java', icon: Code2, color: '#E34F26' },
+  { title: 'Primary Skills', skills: [
     { name: 'C', icon: Code2, color: '#A8B9CC' },
-  ]},
-  { title: 'Frontend Development', skills: [
-    { name: 'React', icon: Code2, color: '#61DAFB' }, 
-    { name: 'HTML5', icon: Box, color: '#E34F26' },
-    { name: 'CSS3', icon: Box, color: '#1572B6' },
-    { name: 'Responsive Design', icon: Cpu, color: '#4ECDC4' },
-    { name: 'UI/UX', icon: Layers, color: '#FF6B6B' },
-    { name: 'State Management', icon: Cpu, color: '#764ABC' },
-  ]},
-  { title: 'Backend & Frameworks', skills: [
+    { name: 'C++', icon: Code2, color: '#00599C' },
+    { name: 'Java', icon: Code2, color: '#ED8B00' },
+    { name: 'TypeScript', icon: Braces, color: '#3178C6' },
+    { name: 'JavaScript', icon: Code2, color: '#F7DF1E' },
+    { name: 'Python', icon: Brain, color: '#3776AB' },
     { name: 'Node.js', icon: Server, color: '#339933' },
     { name: 'Express.js', icon: Server, color: '#000000' },
-    { name: 'Socket.io', icon: Server, color: '#010101' },
     { name: 'REST APIs', icon: Code2, color: '#25D366' },
-    { name: 'GraphQL', icon: Code2, color: '#E10098' },
     { name: 'WebSockets', icon: Server, color: '#010101' },
+    { name: 'Authentication & Authorization', icon: Brain, color: '#FF6B6B' },
+    { name: 'RBAC', icon: Layers, color: '#4ECDC4' },
+    { name: 'React', icon: Code2, color: '#61DAFB' },
+    { name: 'MongoDB', icon: Database, color: '#4DB33D' },
   ]},
-  { title: 'Databases', skills: [
-    { name: 'MongoDB', icon: Database, color: '#4DB33D' }, 
-    { name: 'MySQL', icon: Database, color: '#336791' },
+  { title: 'Secondary Skills', skills: [
+    { name: 'HTML', icon: Box, color: '#E34F26' },
+    { name: 'CSS', icon: Box, color: '#1572B6' },
     { name: 'SQL', icon: Database, color: '#336791' },
-  ]},
-  { title: 'Data & Analytics', skills: [
-    { name: 'PowerBI', icon: Database, color: '#F2C811' },
-    { name: 'Data Visualization', icon: Cpu, color: '#FF6B6B' },
-    { name: 'Business Intelligence', icon: Brain, color: '#4ECDC4' },
-    { name: 'DAX', icon: Code2, color: '#F2C811' },
-  ]},
-  { title: 'Enterprise & Cloud', skills: [
-    { name: 'AWS', icon: Cloud, color: '#FF9900' },
+    { name: 'MySQL', icon: Database, color: '#336791' },
     { name: 'Docker', icon: Box, color: '#2496ED' },
-    { name: 'DevOps', icon: Cloud, color: '#00D9FF' },
-    { name: 'Cloud Computing', icon: Cloud, color: '#00D9FF' },
+    { name: 'Linux', icon: Cpu, color: '#FCC624' },
+    { name: 'PySpark', icon: Sparkles, color: '#E25A1C' },
+    { name: 'AWS', icon: Cloud, color: '#FF9900' },
+    { name: 'DAX', icon: Code2, color: '#F2C811' },
+    { name: 'PowerBI', icon: Database, color: '#F2C811' },
+    { name: 'Ruby', icon: Code2, color: '#CC342D' },
+    { name: 'Go', icon: Code2, color: '#00ADD8' },
+    { name: 'Bash', icon: Terminal, color: '#4EAA25' },
+    { name: 'Swift', icon: Code2, color: '#FA7343' },
   ]},
-  { title: 'Software Engineering', skills: [
-    { name: 'System Design', icon: Layers, color: '#4ECDC4' },
-    { name: 'API Design', icon: Code2, color: '#25D366' },
-    { name: 'Microservices', icon: Server, color: '#339933' },
-    { name: 'Code Review', icon: GitBranch, color: '#F05032' },
-  ]},
-  { title: 'Tools & Concepts', skills: [
-    { name: 'Git', icon: GitBranch, color: '#F05032' },
-    { name: 'Microfrontend', icon: Layers, color: '#764ABC' },
-    { name: 'Object-Oriented Programming', icon: Code2, color: '#4ECDC4' },
-    { name: 'Distributed Systems', icon: Server, color: '#00D9FF' },
-    { name: 'Agile', icon: Layers, color: '#FF6B6B' },
-    { name: 'Real-time Systems', icon: Zap, color: '#FFD23F' },
-    { name: 'Concurrency', icon: Cpu, color: '#00ADD8' },
-    { name: 'Testing', icon: FlaskConical, color: '#C21325' },
-  ]},
-  
 ];
 
 /* ----------------------------------------------------------------------------

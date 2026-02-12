@@ -34,30 +34,30 @@ interface ExperienceCardsProps {
 const defaults: ExperienceItem[] = [
   {
     company: 'Delta Tech-Up Ltd',
-    role: 'Software Engineer — React, Node.js, Python',
+    role: 'Software Engineer',
     location: 'Ahmedabad, India',
     start: 'Jan 2023',
     end: 'Jun 2024',
     bullets: [
-      'Improved system performance by 35% by designing scalable backend services using Node.js and Python, optimizing API workflows and reducing redundant data processing in distributed environments.',
-      'Reduced API latency by 45% by refactoring GraphQL and REST APIs and optimizing MongoDB queries, supporting high-throughput transaction and analytics systems.',
-      'Enhanced reliability and security by implementing structured logging, role-based access control, and automated testing aligned with modern software development and DevOps practices.',
-      'Developed and maintained full-stack web applications using React, Node.js, and MongoDB, ensuring seamless integration between frontend and backend systems.',
-      'Collaborated with cross-functional teams in Agile environments to deliver high-quality software solutions, participating in sprint planning, daily standups, and retrospective meetings.'
+      'Engineered scalable backend services using Node.js and Python, improving system performance by 35% through API workflow optimization and reduced redundant data processing in distributed environments.',
+      'Refactored GraphQL and REST APIs and optimized MongoDB queries, reducing latency by 45% to support high-throughput transaction and analytics systems.',
+      'Enhanced reliability and security by implementing structured logging, role-based access control, and automated testing aligned with modern DevOps practices.',
+      'Developed and maintained full-stack web applications with React, Node.js, and MongoDB, ensuring seamless frontend-backend integration.',
+      'Collaborated with cross-functional teams in Agile environments, participating in sprint planning, daily standups, and retrospectives to deliver high-quality software solutions.'
     ],
   },
   {
     company: 'Kintu Designs Pvt Ltd',
-    role: 'Frontend Developer Intern — React, WebSockets',
+    role: 'Software Engineer Intern',
     location: 'Surat, India',
     start: 'May 2022',
     end: 'Jul 2022',
     bullets: [
-      'Increased real-time collaboration efficiency by 30% by building interactive UIs with React and implementing low-latency communication using WebSockets.',
-      'Improved code quality by creating reusable components and performing unit testing, accelerating feature delivery across multiple client-facing applications.',
-      'Collaborated in Agile sprints, code reviews, and deployment cycles using Git, contributing to stable and maintainable frontend releases.',
+      'Built interactive UIs with React and implemented low-latency WebSocket communication, increasing real-time collaboration efficiency by 30%.',
+      'Created reusable components and performed unit testing, improving code quality and accelerating feature delivery across multiple client-facing applications.',
+      'Participated in Agile sprints, code reviews, and deployment cycles using Git, contributing to stable and maintainable frontend releases.',
       'Developed responsive web interfaces using React, HTML5, CSS3, and JavaScript, ensuring cross-browser compatibility and optimal user experience.',
-      'Participated in design discussions and implemented UI/UX improvements based on user feedback and design specifications.'
+      'Implemented UI/UX improvements based on user feedback and design specifications, participating in design discussions and solution brainstorming.'
     ],
   },
 ]; // Experience data with comprehensive responsibilities

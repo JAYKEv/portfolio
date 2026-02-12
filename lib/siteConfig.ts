@@ -1,11 +1,11 @@
 export const site = {
   name: "Jaykumar Kevadiya",
-  role: "Software Engineer",
-  summary:
-    "Passionate about building scalable web applications and cloud-native solutions with expertise in React, Node.js, and Python.",
-  location: "Ontario, Canada",
+  role: "Software Engineer — Full-Stack & Backend (React, Node.js, Python)",
+  summary: "I build scalable backend systems, full-stack applications, and real-time platforms. Skilled in designing APIs, handling concurrency, optimizing performance, and delivering software used by hundreds of users. Experienced in distributed systems, networking, real-time communication, and security-focused applications. Actively seeking Software Engineer roles focused on backend, systems, and full-stack development.\n\n🏅 LeetCode yearly badge for solving daily DSA problems.",
+  location: "Toronto, ON",
   email: "kevadiyj@uwindsor.ca",
   phone: "+1 (519)-990-3981",
+  resume: "/resume.pdf", // Add resume file path
   socials: {
     github: "https://github.com/JAYKEv",
     linkedin: "https://www.linkedin.com/in/jay-kevadiya-a43432190/",
@@ -13,109 +13,157 @@ export const site = {
   },
   nav: [
     { href: "#about", label: "About" },
+    { href: "#experience", label: "Experience" },
     { href: "#projects", label: "Projects" },
+    { href: "#skills", label: "Skills" },
     { href: "#contact", label: "Contact" }
   ],
   
-  projects: [
+  // Primary Skills (used in featured projects)
+  primarySkills: [
+    "C", "C++", "Java", "TypeScript", "JavaScript", "Python",
+    "Node.js", "Express.js", "REST APIs", "WebSockets", "Authentication & Authorization", "RBAC",
+    "React", "MongoDB"
+  ],
+  
+  // Secondary Skills (additional knowledge)
+  secondarySkills: [
+    "HTML", "CSS", "SQL", "MySQL", "Docker", "Linux", "PySpark", "AWS", "DAX", "PowerBI",
+    "Ruby", "Go", "Bash", "Swift"
+  ],
+  
+  // Featured Projects (6-7 max, with bullets)
+  featuredProjects: [
     {
-      title: "Pizza Ordering System",
-      description:
-        "Full-stack ordering platform with secure REST APIs built using Node.js, implementing authentication and order workflows end-to-end. Optimized MongoDB schemas and queries resulting in 30% faster database response times supporting concurrent users and orders.",
-      tags: ["React", "Node.js", "MongoDB", "REST APIs", "TypeScript", "Microfrontend"],
-      link: "https://github.com/JAYKEv/pizza-app-mern-microfrontend-ts"
-    },
-    {
-      title: "ClinicPulse",
-      description:
-        "Healthcare management system built with modern web technologies. Features patient management, appointment scheduling, and medical records tracking with a clean and intuitive user interface.",
-      tags: ["CSS", "HTML", "Web Development", "Healthcare", "Frontend"],
-      link: "https://github.com/JAYKEv/ClinicPulse-main"
-    },
-    {
-      title: "Library Management System",
-      description:
-        "Comprehensive library management application developed in Java. Handles book inventory, member management, borrowing/returning operations, and generates reports for efficient library operations.",
-      tags: ["Java", "Desktop Application", "Database", "OOP", "Swing"],
-      link: "https://github.com/JAYKEv/Library-Management-System-JK"
-    },
-    {
-      title: "Sales Report Dashboard - PowerBI",
-      description:
-        "Interactive business intelligence dashboard built with PowerBI for sales analytics and reporting. Visualizes sales trends, performance metrics, and generates actionable insights for data-driven decision making.",
-      tags: ["PowerBI", "Data Visualization", "Business Intelligence", "Analytics", "DAX"],
-      link: "https://github.com/JAYKEv/Sales_Report-PowerBI-JK"
-    },
-    {
-      title: "Cricket App",
-      description:
-        "Sports application for cricket enthusiasts featuring live scores, match statistics, player information, and team management. Built with TypeScript for type-safe development and React for responsive UI.",
-      tags: ["TypeScript", "React", "Sports", "API Integration", "State Management"],
-      link: "https://github.com/JAYKEv/Cricket_App"
-    },
-    {
-      title: "Distributed File System",
-      description:
-        "Distributed file system implementation in C providing file storage and retrieval across multiple nodes. Features replication, fault tolerance, and efficient data distribution algorithms for scalable storage solutions.",
-      tags: ["C", "Distributed Systems", "File System", "Systems Programming", "Networking"],
-      link: "https://github.com/JAYKEv/Distributed-File-System"
-    },
-    {
-      title: "Clade Collaborative Platform",
-      description:
-        "Real-time collaborative coding platform using Socket.io to synchronize multi-user sessions with 25% lower update latency. Developed backend services with Node.js and optimized MongoDB queries to ensure data consistency and scalability.",
-      tags: ["React", "Node.js", "Socket.io", "MongoDB", "Real-time", "Object-Oriented Programming"],
+      title: "Clade – Real-Time Collaborative Platform",
+      description: "Real-time collaborative coding platform enabling multiple users to edit shared documents simultaneously.",
+      bullets: [
+        "Built a real-time collaborative coding platform enabling multiple users to edit shared documents simultaneously.",
+        "Reduced update latency by 25% and supported 100+ concurrent sessions with sub-100ms response times.",
+        "Optimized MongoDB queries and backend state handling for conflict-free concurrent edits."
+      ],
+      tags: ["React", "Node.js", "Socket.io", "MongoDB"],
+      github: "https://github.com/JAYKEv/Clade",
       link: "https://github.com/JAYKEv/Clade"
     },
     {
-      title: "Cryptomaster",
-      description:
-        "Responsive cryptocurrency dashboard using React and third-party REST APIs for real-time market tracking. Improved load performance by 20% through optimized state management and efficient API polling strategies with structured error handling.",
-      tags: ["React", "REST APIs", "State Management", "Responsive Design", "JavaScript"],
-      link: "https://github.com/JAYKEv/Cryptomaster"
+      title: "Distributed File System",
+      description: "Distributed file system with replication, fault tolerance, and concurrent file access.",
+      bullets: [
+        "Implemented a distributed file system with replication, fault tolerance, and concurrent file access.",
+        "Designed socket-based protocols ensuring reliable network communication.",
+        "Developed locking mechanisms for safe multi-node concurrent access."
+      ],
+      tags: ["C", "Networking", "Distributed Systems", "Socket Programming"],
+      github: "https://github.com/JAYKEv/Distributed-File-System",
+      link: "https://github.com/JAYKEv/Distributed-File-System"
     },
     {
-      title: "Web Clinic",
-      description:
-        "Web-based clinic management system with high-performance backend service handling patient data, appointments, and medical records with efficient concurrency and scalability.",
-      tags: ["Backend", "Healthcare", "Web Service", "Concurrency", "Full Stack"],
+      title: "Web Clinic – High-Concurrency Backend",
+      description: "Backend system for patient data, appointments, and medical records with high concurrency support.",
+      bullets: [
+        "Built backend system for patient data, appointments, and medical records.",
+        "Supported 1000+ simultaneous requests with sub-200ms response time.",
+        "Optimized complex MongoDB queries, improving execution speed by 45%."
+      ],
+      tags: ["Node.js", "Express.js", "MongoDB", "REST APIs"],
+      github: "https://github.com/JAYKEv/Web-Clinic-JK",
       link: "https://github.com/JAYKEv/Web-Clinic-JK"
     },
     {
-      title: "Visual Collaboration Platform",
-      description:
-        "Real-time visual collaboration tool enabling teams to work together on shared canvases. Features drawing tools, real-time synchronization, and multi-user support for creative collaboration.",
-      tags: ["JavaScript", "Real-time", "Collaboration", "WebSocket"],
-      link: "https://github.com/JAYKEv/Visual-Collaboration-Platform"
+      title: "Pizza Ordering System – Full-Stack Product",
+      description: "Full-stack food ordering platform with cart, checkout, payment, and admin dashboard.",
+      bullets: [
+        "Developed full-stack food ordering platform with cart, checkout, payment, and admin dashboard.",
+        "Implemented microfrontend architecture, reducing deployment time by 40% and supporting 500+ concurrent users.",
+        "Optimized APIs and database queries, improving performance by 30%."
+      ],
+      tags: ["React", "Node.js", "MongoDB", "Microfrontend", "TypeScript"],
+      github: "https://github.com/JAYKEv/pizza-app-mern-microfrontend-ts",
+      link: "https://github.com/JAYKEv/pizza-app-mern-microfrontend-ts"
+    },
+    {
+      title: "IdentityGuard-Service",
+      description: "Production-grade authentication and session management service with JWT, refresh token rotation, reuse detection, and RBAC.",
+      bullets: [
+        "Built production-grade authentication and session management service with JWT, refresh token rotation, reuse detection, and RBAC.",
+        "Integrated security-focused audit logging and robust session handling for multi-tenant applications.",
+        "Containerized using Docker for scalable deployment."
+      ],
+      tags: ["Node.js", "TypeScript", "JWT", "Express", "Docker", "RBAC"],
+      github: "https://github.com/JAYKEv/IdentityGuard-Service",
+      link: "https://github.com/JAYKEv/IdentityGuard-Service"
+    },
+    {
+      title: "SecureAuth-Portal",
+      description: "Full-stack authentication portal with JWT refresh tokens, RBAC, audit logging, and rate limiting.",
+      bullets: [
+        "Developed full-stack authentication portal with JWT refresh tokens, RBAC, audit logging, and rate limiting.",
+        "Built modern, responsive UI/UX while maintaining production-level security.",
+        "Dockerized for seamless integration with IdentityGuard-Service."
+      ],
+      tags: ["React", "Node.js", "TypeScript", "Express", "JWT", "Docker"],
+      github: "https://github.com/JAYKEv/SecureAuth-Portal",
+      link: "https://github.com/JAYKEv/SecureAuth-Portal"
+    },
+    {
+      title: "AuthCore-Service",
+      description: "Backend authentication and authorization with JWT, refresh token rotation, RBAC, and rate limiting.",
+      bullets: [
+        "Built backend authentication and authorization with JWT, refresh token rotation, RBAC, and rate limiting.",
+        "Integrated audit logging and token reuse detection.",
+        "Dockerized for production-ready deployment."
+      ],
+      tags: ["Node.js", "TypeScript", "Express", "JWT", "Docker"],
+      github: "https://github.com/JAYKEv/AuthCore-Service",
+      link: "https://github.com/JAYKEv/AuthCore-Service"
+    }
+  ],
+  
+  // Other Projects (GitHub links only)
+  otherProjects: [
+    {
+      title: "Netflix Clone",
+      tags: ["React", "Node.js", "MongoDB"],
+      github: "https://github.com/JAYKEv/React1"
     },
     {
       title: "InstaEats",
-      description:
-        "Food delivery and restaurant management platform. Features menu browsing, order placement, payment processing, and restaurant dashboard for managing orders and inventory.",
-      tags: ["JavaScript", "Food Delivery", "E-commerce", "Full Stack"],
-      link: "https://github.com/JAYKEv/InstaEats"
+      tags: ["Node.js", "React", "E-commerce"],
+      github: "https://github.com/JAYKEv/InstaEats"
     },
     {
       title: "Code4Share",
-      description:
-        "Code sharing and collaboration platform for developers. Share code snippets, collaborate on projects, and discover useful code examples from the community.",
-      tags: ["JavaScript", "Code Sharing", "Developer Tools", "Community"],
-      link: "https://github.com/JAYKEv/Code4Share-6851cdfa7cad57c47c7ad7afb63befb16659b2cf"
+      tags: ["JavaScript", "Developer Tools"],
+      github: "https://github.com/JAYKEv/Code4Share-6851cdfa7cad57c47c7ad7afb63befb16659b2cf"
     },
     {
-      title: "Authentication System",
-      description:
-        "Secure authentication and login system with user registration, login, password management, and session handling. Implements best practices for security and user experience.",
-      tags: ["JavaScript", "Authentication", "Security", "User Management"],
-      link: "https://github.com/JAYKEv/login2"
+      title: "Cryptomaster",
+      tags: ["React", "Node.js", "Crypto APIs"],
+      github: "https://github.com/JAYKEv/Cryptomaster"
     },
     {
-      title: "Netflix Clone",
-      description:
-        "Streaming platform clone inspired by Netflix. Features video playback, user profiles, content recommendations, and a modern responsive UI built with React and CSS.",
-      tags: ["React", "CSS", "Streaming", "Frontend", "Entertainment"],
-      link: "https://github.com/JAYKEv/React1"
+      title: "Library Management System",
+      tags: ["Java", "MySQL"],
+      github: "https://github.com/JAYKEv/Library-Management-System-JK"
     },
-  ]
+    {
+      title: "ClinicPulse",
+      tags: ["JavaScript", "Healthcare App"],
+      github: "https://github.com/JAYKEv/ClinicPulse-main"
+    },
+    {
+      title: "Sales Report Dashboard",
+      tags: ["PowerBI", "DAX"],
+      github: "https://github.com/JAYKEv/Sales_Report-PowerBI-JK"
+    },
+    {
+      title: "Cricket App",
+      tags: ["React", "TypeScript", "REST APIs"],
+      github: "https://github.com/JAYKEv/Cricket_App"
+    }
+  ],
+  
+  // Legacy projects array (for backward compatibility)
+  projects: []
 };
-
