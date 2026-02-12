@@ -34,33 +34,30 @@ interface ExperienceCardsProps {
 const defaults: ExperienceItem[] = [
   {
     company: 'Delta Tech-Up Ltd',
-    role: 'Software Engineer',
+    role: 'Software Engineer — Node.js, Python, MongoDB',
     location: 'Ahmedabad, India',
     start: 'Jan 2023',
     end: 'Jun 2024',
     bullets: [
-      'Engineered scalable backend services using Node.js and Python, improving system performance by 35% through API workflow optimization and reduced redundant data processing in distributed environments.',
-      'Refactored GraphQL and REST APIs and optimized MongoDB queries, reducing latency by 45% to support high-throughput transaction and analytics systems.',
-      'Enhanced reliability and security by implementing structured logging, role-based access control, and automated testing aligned with modern DevOps practices.',
-      'Developed and maintained full-stack web applications with React, Node.js, and MongoDB, ensuring seamless frontend-backend integration.',
-      'Collaborated with cross-functional teams in Agile environments, participating in sprint planning, daily standups, and retrospectives to deliver high-quality software solutions.'
+      'Designed scalable backend services using Node.js and Python, improving system performance by 35% and reducing request failures.',
+      'Refactored REST APIs and GraphQL resolvers and optimized MongoDB, reducing API latency by 45%.',
+      'Implemented structured logging, role-based access control, and automated testing, enhancing reliability and security.',
+      'Developed full-stack web applications with React, Node.js, and MongoDB, ensuring seamless integration.'
     ],
   },
   {
     company: 'Kintu Designs Pvt Ltd',
-    role: 'Software Engineer Intern',
+    role: 'Frontend Developer Intern — React, WebSockets',
     location: 'Surat, India',
     start: 'May 2022',
     end: 'Jul 2022',
     bullets: [
-      'Built interactive UIs with React and implemented low-latency WebSocket communication, increasing real-time collaboration efficiency by 30%.',
-      'Created reusable components and performed unit testing, improving code quality and accelerating feature delivery across multiple client-facing applications.',
-      'Participated in Agile sprints, code reviews, and deployment cycles using Git, contributing to stable and maintainable frontend releases.',
-      'Developed responsive web interfaces using React, HTML5, CSS3, and JavaScript, ensuring cross-browser compatibility and optimal user experience.',
-      'Implemented UI/UX improvements based on user feedback and design specifications, participating in design discussions and solution brainstorming.'
+      'Built real-time collaborative UI features using React and WebSockets, improving live update responsiveness by 30%.',
+      'Developed reusable React components and performed unit testing, reducing frontend defects.',
+      'Participated in Agile sprints, code reviews, and deployment cycles using Git, enhancing delivery stability.'
     ],
   },
-]; // Experience data with comprehensive responsibilities
+]; // Experience data matching resume
 
 const defaultEducation: EducationItem[] = [
   {

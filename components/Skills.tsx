@@ -26,40 +26,37 @@ interface SkillsProps {
 }
 
 /* ----------------------------------------------------------------------------
-  Defaults with enhanced colors - Primary and Secondary Skills
+  Defaults with enhanced colors - Primary and Secondary Skills (Resume format)
 ---------------------------------------------------------------------------- */
 const defaultGridCategories: SkillCategory[] = [
-  { title: 'Primary Skills', skills: [
-    { name: 'C', icon: Code2, color: '#A8B9CC' },
-    { name: 'C++', icon: Code2, color: '#00599C' },
-    { name: 'Java', icon: Code2, color: '#ED8B00' },
-    { name: 'TypeScript', icon: Braces, color: '#3178C6' },
-    { name: 'JavaScript', icon: Code2, color: '#F7DF1E' },
+  { title: 'Languages & Frameworks', skills: [
     { name: 'Python', icon: Brain, color: '#3776AB' },
+    { name: 'JavaScript', icon: Code2, color: '#F7DF1E' },
+    { name: 'TypeScript', icon: Braces, color: '#3178C6' },
+    { name: 'Java', icon: Code2, color: '#ED8B00' },
+    { name: 'C++', icon: Code2, color: '#00599C' },
+    { name: 'C', icon: Code2, color: '#A8B9CC' },
+    { name: 'React', icon: Code2, color: '#61DAFB' },
+    { name: 'React Native', icon: Code2, color: '#61DAFB' },
     { name: 'Node.js', icon: Server, color: '#339933' },
     { name: 'Express.js', icon: Server, color: '#000000' },
-    { name: 'REST APIs', icon: Code2, color: '#25D366' },
-    { name: 'WebSockets', icon: Server, color: '#010101' },
-    { name: 'Authentication & Authorization', icon: Brain, color: '#FF6B6B' },
-    { name: 'RBAC', icon: Layers, color: '#4ECDC4' },
-    { name: 'React', icon: Code2, color: '#61DAFB' },
-    { name: 'MongoDB', icon: Database, color: '#4DB33D' },
   ]},
-  { title: 'Secondary Skills', skills: [
-    { name: 'HTML', icon: Box, color: '#E34F26' },
-    { name: 'CSS', icon: Box, color: '#1572B6' },
-    { name: 'SQL', icon: Database, color: '#336791' },
+  { title: 'Databases & Tools', skills: [
+    { name: 'MongoDB', icon: Database, color: '#4DB33D' },
     { name: 'MySQL', icon: Database, color: '#336791' },
     { name: 'Docker', icon: Box, color: '#2496ED' },
-    { name: 'Linux', icon: Cpu, color: '#FCC624' },
-    { name: 'PySpark', icon: Sparkles, color: '#E25A1C' },
-    { name: 'AWS', icon: Cloud, color: '#FF9900' },
-    { name: 'DAX', icon: Code2, color: '#F2C811' },
-    { name: 'PowerBI', icon: Database, color: '#F2C811' },
-    { name: 'Ruby', icon: Code2, color: '#CC342D' },
-    { name: 'Go', icon: Code2, color: '#00ADD8' },
-    { name: 'Bash', icon: Terminal, color: '#4EAA25' },
-    { name: 'Swift', icon: Code2, color: '#FA7343' },
+    { name: 'Git', icon: GitBranch, color: '#F05032' },
+    { name: 'Azure', icon: Cloud, color: '#0078D4' },
+    { name: 'Postman', icon: Code2, color: '#FF6C37' },
+  ]},
+  { title: 'Concepts & Technologies', skills: [
+    { name: 'REST APIs', icon: Code2, color: '#25D366' },
+    { name: 'Authentication & Authorization', icon: Brain, color: '#FF6B6B' },
+    { name: 'RBAC', icon: Layers, color: '#4ECDC4' },
+    { name: 'Agile', icon: Layers, color: '#FF6B6B' },
+    { name: 'Microservices', icon: Server, color: '#339933' },
+    { name: 'JWT', icon: Code2, color: '#000000' },
+    { name: 'WebSockets', icon: Server, color: '#010101' },
   ]},
 ];
 

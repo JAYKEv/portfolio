@@ -3,10 +3,10 @@ export const site = {
   role: "Software Engineer — Full-Stack & Backend (React, Node.js, Python)",
   summary: "I build scalable backend systems, full-stack applications, and real-time platforms. Skilled in designing APIs, handling concurrency, optimizing performance, and delivering software used by hundreds of users. Experienced in distributed systems, networking, real-time communication, and security-focused applications. Actively seeking Software Engineer roles focused on backend, systems, and full-stack development.",
   badge: "🏅 LeetCode yearly badge for solving daily DSA problems",
-  location: "Toronto, ON",
+  location: "Toronto, Canada",
   email: "jay.kevadiya.dev@gmail.com",
   phone: "+1 (519)-990-3981",
-  resume: null, // Resume download - add file path when available
+  resume: "/Jaykumar-Kevadiya-Resume.pdf", // Resume PDF file
   socials: {
     github: "https://github.com/JAYKEv",
     linkedin: "https://www.linkedin.com/in/jay-kevadiya-a43432190/",
@@ -20,21 +20,57 @@ export const site = {
     { href: "#contact", label: "Contact" }
   ],
   
-  // Primary Skills (used in featured projects)
+  // Skills organized as per resume
   primarySkills: [
-    "C", "C++", "Java", "TypeScript", "JavaScript", "Python",
-    "Node.js", "Express.js", "REST APIs", "WebSockets", "Authentication & Authorization", "RBAC",
-    "React", "MongoDB"
+    "Python", "JavaScript", "TypeScript", "Java", "C++", "C",
+    "React", "Node.js", "Express.js", "REST APIs", "WebSockets",
+    "MongoDB", "MySQL", "Authentication & Authorization", "RBAC"
   ],
   
-  // Secondary Skills (additional knowledge)
+  // Secondary Skills
   secondarySkills: [
-    "HTML", "CSS", "SQL", "MySQL", "Docker", "Linux", "PySpark", "AWS", "DAX", "PowerBI",
-    "Ruby", "Go", "Bash", "Swift"
+    "HTML", "CSS", "SQL", "Docker", "Git", "Azure", "Postman",
+    "React Native", "Agile", "Microservices", "JWT"
   ],
   
-  // Featured Projects (6-7 max, with bullets)
+  // Featured Projects (prioritizing resume projects)
   featuredProjects: [
+    {
+      title: "IdentityGuard-Service",
+      description: "Production-grade authentication and session management service with JWT, refresh token rotation, reuse detection, and RBAC.",
+      bullets: [
+        "Built production-grade authentication and session management service with JWT, refresh token rotation, reuse detection, and RBAC.",
+        "Integrated audit logging and security-focused session management for multi-tenant applications.",
+        "Dockerized for scalable deployment and seamless integration with other services."
+      ],
+      tags: ["Node.js", "TypeScript", "JWT", "Express", "Docker", "RBAC"],
+      github: "https://github.com/JAYKEv/IdentityGuard-Service",
+      link: "https://github.com/JAYKEv/IdentityGuard-Service"
+    },
+    {
+      title: "SecureAuth-Portal",
+      description: "Full-stack authentication portal with JWT refresh tokens, RBAC, audit logging, and rate limiting.",
+      bullets: [
+        "Developed full-stack authentication portal with JWT refresh tokens, RBAC, audit logging, and rate limiting.",
+        "Implemented modern, responsive UI/UX with React and integrated secure backend services.",
+        "Dockerized portal for production-ready deployment and seamless microservice compatibility."
+      ],
+      tags: ["React", "Node.js", "TypeScript", "Express", "JWT", "Docker"],
+      github: "https://github.com/JAYKEv/SecureAuth-Portal",
+      link: "https://github.com/JAYKEv/SecureAuth-Portal"
+    },
+    {
+      title: "Pizza Ordering System",
+      description: "Full-stack food ordering platform with cart, checkout, payment, and admin dashboard.",
+      bullets: [
+        "Built full-stack food ordering platform with cart, checkout, payment, and admin dashboard using React and Node.js.",
+        "Optimized MongoDB queries and implemented microfrontend architecture, reducing response time by 30% and deployment time by 40%.",
+        "Designed scalable service layers and centralized error handling, supporting 500+ concurrent users."
+      ],
+      tags: ["React", "Node.js", "MongoDB", "TypeScript", "Microfrontend"],
+      github: "https://github.com/JAYKEv/pizza-app-mern-microfrontend-ts",
+      link: "https://github.com/JAYKEv/pizza-app-mern-microfrontend-ts"
+    },
     {
       title: "Clade – Real-Time Collaborative Platform",
       description: "Real-time collaborative coding platform enabling multiple users to edit shared documents simultaneously.",
@@ -72,43 +108,7 @@ export const site = {
       link: "https://github.com/JAYKEv/Web-Clinic-JK"
     },
     {
-      title: "Pizza Ordering System – Full-Stack Product",
-      description: "Full-stack food ordering platform with cart, checkout, payment, and admin dashboard.",
-      bullets: [
-        "Developed full-stack food ordering platform with cart, checkout, payment, and admin dashboard.",
-        "Implemented microfrontend architecture, reducing deployment time by 40% and supporting 500+ concurrent users.",
-        "Optimized APIs and database queries, improving performance by 30%."
-      ],
-      tags: ["React", "Node.js", "MongoDB", "Microfrontend", "TypeScript"],
-      github: "https://github.com/JAYKEv/pizza-app-mern-microfrontend-ts",
-      link: "https://github.com/JAYKEv/pizza-app-mern-microfrontend-ts"
-    },
-    {
-      title: "IdentityGuard-Service",
-      description: "Production-grade authentication and session management service with JWT, refresh token rotation, reuse detection, and RBAC.",
-      bullets: [
-        "Built production-grade authentication and session management service with JWT, refresh token rotation, reuse detection, and RBAC.",
-        "Integrated security-focused audit logging and robust session handling for multi-tenant applications.",
-        "Containerized using Docker for scalable deployment."
-      ],
-      tags: ["Node.js", "TypeScript", "JWT", "Express", "Docker", "RBAC"],
-      github: "https://github.com/JAYKEv/IdentityGuard-Service",
-      link: "https://github.com/JAYKEv/IdentityGuard-Service"
-    },
-    {
-      title: "SecureAuth-Portal",
-      description: "Full-stack authentication portal with JWT refresh tokens, RBAC, audit logging, and rate limiting.",
-      bullets: [
-        "Developed full-stack authentication portal with JWT refresh tokens, RBAC, audit logging, and rate limiting.",
-        "Built modern, responsive UI/UX while maintaining production-level security.",
-        "Dockerized for seamless integration with IdentityGuard-Service."
-      ],
-      tags: ["React", "Node.js", "TypeScript", "Express", "JWT", "Docker"],
-      github: "https://github.com/JAYKEv/SecureAuth-Portal",
-      link: "https://github.com/JAYKEv/SecureAuth-Portal"
-    },
-    {
-      title: "AuthCore-Service (GitHub only)",
+      title: "AuthCore-Service",
       description: "Backend authentication and authorization with JWT, refresh token rotation, RBAC, and rate limiting.",
       bullets: [
         "Built backend authentication and authorization with JWT, refresh token rotation, RBAC, and rate limiting.",
