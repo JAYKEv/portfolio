@@ -71,7 +71,7 @@ export default function Home() {
                 <span>GitHub</span>
               </a>
             )}
-            {site.resume && (
+            {site.resume ? (
               <a
                 href={site.resume}
                 download
@@ -81,6 +81,12 @@ export default function Home() {
                 <Download className="w-5 h-5" />
                 <span>Resume</span>
               </a>
+            ) : (
+              <span className="inline-flex items-center gap-2 px-6 py-3 bg-gray-400 text-white rounded-lg
+                             cursor-not-allowed opacity-75">
+                <Download className="w-5 h-5" />
+                <span>Resume [Download PDF]</span>
+              </span>
             )}
           </div>
         </div>
@@ -173,7 +179,7 @@ export default function Home() {
               </a>
             )}
 
-            {site.resume && (
+            {site.resume ? (
               <a
                 href={site.resume}
                 download
@@ -186,6 +192,13 @@ export default function Home() {
                 <Download className="w-5 h-5 text-green-400" />
                 <span className="font-semibold">Download Resume</span>
               </a>
+            ) : (
+              <span className="group relative inline-flex items-center gap-3 px-8 py-4
+                             bg-gray-500/20 border border-gray-400/30 rounded-2xl
+                             text-zinc-400 cursor-not-allowed opacity-75">
+                <Download className="w-5 h-5 text-gray-400" />
+                <span className="font-semibold">Resume [Download PDF]</span>
+              </span>
             )}
           </div>
 
