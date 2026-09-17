@@ -1,7 +1,5 @@
-To add your resume:
-1. Place "Jaykumar Kevadiya - Resume.pdf" in this public folder
-2. Rename it to "Jaykumar-Kevadiya-Resume.pdf" (or update the path in lib/siteConfig.ts)
-3. The resume link will automatically work once the file is in place
+Place your résumé PDF here as:
 
-Current resume path configured: /Jaykumar-Kevadiya-Resume.pdf
+  public/resume.pdf
 
+The site already links “Résumé” and “Download Résumé” to /resume.pdf.

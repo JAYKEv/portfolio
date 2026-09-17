@@ -1,370 +1,418 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { site } from '@/lib/siteConfig';
-import { Menu, X, Code, Folder, Settings, Search } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ArrowUpRight, Github, Linkedin, Mail, FileText, ChevronDown } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { NoiseBackground } from "@/components/ui/noise-background";
+import { content } from "@/lib/content";
+import { cn } from "@/lib/utils";
+import { useLenis } from "@/components/LenisProvider";
 
-/* ---------- VS CODE THEMED HELPERS ---------- */
-function VSCodeDots() {
-  return (
-    <div className="flex items-center gap-2">
-      <span className="h-3 w-3 rounded-full bg-[#ff5f57] border border-[#e0443e] shadow-sm hover:bg-[#ff6b63] transition-colors duration-200 cursor-pointer" />
-      <span className="h-3 w-3 rounded-full bg-[#ffbd2e] border border-[#dea123] shadow-sm hover:bg-[#ffc441] transition-colors duration-200 cursor-pointer" />
-      <span className="h-3 w-3 rounded-full bg-[#28ca42] border border-[#1aab29] shadow-sm hover:bg-[#32d249] transition-colors duration-200 cursor-pointer" />
-    </div>
-  );
-}
+const navSections = [
+  { id: "about", label: "About", href: "#about" },
+  { id: "work", label: "Work", href: "#work", hasDropdown: true },
+  { id: "skills", label: "Skills", href: "#skills" },
+  { id: "experience", label: "Experience", href: "#experience" },
+  { id: "contact", label: "Connect", href: "#contact", hasDropdown: true },
+];
 
-function VSCodeBrand({ text }: { text: string }) {
-  return (
-    <div className="flex items-center gap-3">
-      <Code className="h-5 w-5 text-[#007acc]" />
-      <span className="font-mono text-sm text-[#cccccc] select-none flex items-center gap-1">
-        <span className="text-[#569cd6] font-semibold">{text}</span>
-        <span className="text-[#6a9955]">//</span>
-        <span className="text-[#4ec9b0] text-xs">portfolio.tsx</span>
-        <span className="ml-1 w-0.5 h-4 bg-[#007acc] animate-pulse"></span>
-      </span>
-    </div>
-  );
-}
-
-function TabIndicator({ isActive = false }: { isActive?: boolean }) {
-  return (
-    <div className={`absolute top-0 left-0 right-0 h-0.5 transition-all duration-200 ${
-      isActive ? 'bg-[#007acc]' : 'bg-transparent'
-    }`} />
-  );
-}
-
-/* ============================================================================
- * VS CODE THEMED NAVBAR
- * - Dark VS Code color scheme
- * - Tab-like navigation buttons
- * - Maintains terminal integration for "About"
- * ==========================================================================*/
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeTab, setActiveTab] = useState('');
+  const { scrollTo } = useLenis();
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("about");
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileWorkExpanded, setMobileWorkExpanded] = useState(false);
+  const [mobileConnectExpanded, setMobileConnectExpanded] = useState(false);
 
+  // Monitor scroll for glass effect
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const barBase = 'fixed top-0 left-0 right-0 z-50 transition-all duration-300';
-  const barSkin = isScrolled
-    ? 'bg-[#1e1e1e] border-b border-[#333333] shadow-[0_2px_8px_rgba(0,0,0,0.8)]'
-    : 'bg-[#1e1e1e]/95 border-b border-[#2d2d30] shadow-[0_1px_3px_rgba(0,0,0,0.5)]';
+  // IntersectionObserver for active section highlight
+  useEffect(() => {
+    const sectionIds = ["hero", "about", "work", "skills", "experience", "contact"];
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
 
-  const isAbout = (label: string) =>
-    label.toLowerCase() === 'about' || label.toLowerCase().includes('about me');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-  const handleItemClick = (label: string, href: string) => (e: React.MouseEvent) => {
-    setActiveTab(label);
-    
-    if (isAbout(label)) {
+        if (visible?.target.id) {
+          const id = visible.target.id === "hero" ? "about" : visible.target.id;
+          setActiveSection(id);
+        }
+      },
+      { rootMargin: "-25% 0px -55% 0px", threshold: [0.1, 0.25, 0.5] }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
       e.preventDefault();
-      const target = document.querySelector('#terminal');
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-      document.dispatchEvent(new CustomEvent('terminal:run'));
-      setIsOpen(false);
-      return;
+      scrollTo(href);
+      setMobileMenuOpen(false);
     }
-    setIsOpen(false);
   };
 
   return (
-    <nav className={`${barBase} ${barSkin}`}>
-      {/* VS Code window controls */}
-      <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
-        <VSCodeDots />
-      </div>
+    <>
+      <a
+        href="#about"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-[rgb(var(--foreground))] focus:px-4 focus:py-2 focus:text-[rgb(var(--background))]"
+      >
+        Skip to content
+      </a>
 
-      <div className="mx-auto max-w-7xl px-4 pl-20">
-        <div className="flex h-12 items-center">
-          {/* Brand/Logo */}
-          <div className="flex items-center">
-            <VSCodeBrand text={site?.name?.split(' ')[0] || 'Portfolio'} />
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+          scrolled
+            ? "border-b border-[rgb(var(--border))] bg-[rgb(var(--background))]/80 backdrop-blur-md shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.3)]"
+            : "border-b border-transparent bg-transparent"
+        )}
+      >
+        <div className="mx-auto flex h-16 max-w-site items-center justify-between px-5 md:h-[4.25rem] md:px-8">
+          {/* Logo / Initials */}
+          <a
+            href="#hero"
+            onClick={(e) => handleNavClick(e, "#hero")}
+            className="group flex items-center gap-2.5 text-base font-semibold tracking-tight text-[rgb(var(--foreground))]"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-[rgb(var(--border))] bg-[rgb(var(--bg-elevated))] font-mono text-xs font-bold text-[rgb(var(--foreground))] transition group-hover:border-[rgb(var(--accent))] group-hover:text-[rgb(var(--accent))]">
+              {content.personal.initials}
+            </span>
+            <div className="flex flex-col">
+              <span className="text-sm font-semibold leading-tight text-[rgb(var(--foreground))]">
+                {content.personal.name}
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-wider text-[rgb(var(--fg-muted))]">
+                Portfolio
+              </span>
+            </div>
+          </a>
+
+          {/* Desktop Nav Center Pill */}
+          <div
+            className="hidden items-center gap-1 rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--bg-elevated))]/85 p-1 shadow-[0_8px_24px_rgba(0,0,0,0.06)] backdrop-blur-xl md:flex"
+            onMouseLeave={() => setActiveDropdown(null)}
+          >
+            <nav className="flex items-center gap-1" aria-label="Primary navigation">
+              {navSections.map((item) => {
+                const isActive = activeSection === item.id;
+
+                return (
+                  <div
+                    key={item.id}
+                    className="relative"
+                    onMouseEnter={() => {
+                      if (item.hasDropdown) setActiveDropdown(item.id);
+                      else setActiveDropdown(null);
+                    }}
+                  >
+                    <a
+                      href={item.href}
+                      onClick={(e) => handleNavClick(e, item.href)}
+                      className={cn(
+                        "relative flex items-center gap-1 rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors duration-200",
+                        isActive
+                          ? "text-[rgb(var(--foreground))]"
+                          : "text-[rgb(var(--fg-muted))] hover:text-[rgb(var(--foreground))]"
+                      )}
+                    >
+                      {isActive && (
+                        <motion.span
+                          layoutId="nav-indicator"
+                          className="absolute inset-0 rounded-full bg-[rgb(var(--bg))] border border-[rgb(var(--border))] shadow-sm"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        />
+                      )}
+                      <span className="relative z-10">{item.label}</span>
+                      {item.hasDropdown && (
+                        <ChevronDown className="relative z-10 h-3 w-3 opacity-60 transition-transform duration-200 group-hover:rotate-180" />
+                      )}
+                    </a>
+
+                    {/* Work Dropdown Menu */}
+                    {item.id === "work" && activeDropdown === "work" && (
+                      <div className="absolute left-1/2 top-full -translate-x-1/2 pt-2.5">
+                        <motion.div
+                          initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                          transition={{ duration: 0.18, ease: "easeOut" }}
+                          className="w-[22rem] rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-elevated))]/95 p-3 shadow-[0_20px_48px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+                        >
+                          <div className="mb-2 px-2 pt-1 font-mono text-[10px] uppercase tracking-wider text-[rgb(var(--fg-muted))]">
+                            Featured Projects
+                          </div>
+                          <div className="space-y-1.5">
+                            {content.featuredProjects.map((p) => (
+                              <a
+                                key={p.title}
+                                href={p.github}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="group/item flex items-start gap-3 rounded-lg p-2 transition hover:bg-[rgb(var(--bg))] hover:border-[rgb(var(--border))]"
+                              >
+                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--bg))] font-mono text-xs font-semibold text-[rgb(var(--accent))] transition group-hover/item:border-[rgb(var(--accent))]">
+                                  {p.title.substring(0, 2).toUpperCase()}
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="text-xs font-semibold text-[rgb(var(--foreground))] group-hover/item:text-[rgb(var(--accent))]">
+                                      {p.title}
+                                    </span>
+                                    <ArrowUpRight className="h-3 w-3 opacity-0 transition group-hover/item:opacity-100" />
+                                  </div>
+                                  <p className="line-clamp-1 text-[11px] text-[rgb(var(--fg-muted))]">
+                                    {p.tagline}
+                                  </p>
+                                </div>
+                              </a>
+                            ))}
+                          </div>
+                          <div className="mt-2 border-t border-[rgb(var(--border))] pt-2">
+                            <a
+                              href="#work"
+                              onClick={(e) => {
+                                handleNavClick(e, "#work");
+                                setActiveDropdown(null);
+                              }}
+                              className="block px-2 text-center text-[11px] font-medium text-[rgb(var(--accent))] hover:underline"
+                            >
+                              Explore all projects →
+                            </a>
+                          </div>
+                        </motion.div>
+                      </div>
+                    )}
+
+                    {/* Connect Dropdown Menu */}
+                    {item.id === "contact" && activeDropdown === "contact" && (
+                      <div className="absolute left-1/2 top-full -translate-x-1/2 pt-2.5">
+                        <motion.div
+                          initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                          transition={{ duration: 0.18, ease: "easeOut" }}
+                          className="w-52 rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-elevated))]/95 p-2 shadow-[0_20px_48px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+                        >
+                          <a
+                            href={`mailto:${content.personal.email}`}
+                            className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-xs font-medium text-[rgb(var(--foreground))] transition hover:bg-[rgb(var(--bg))] hover:text-[rgb(var(--accent))]"
+                          >
+                            <Mail className="h-3.5 w-3.5 text-[rgb(var(--fg-muted))]" />
+                            <span>Email Me</span>
+                          </a>
+                          <a
+                            href={content.personal.github}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-xs font-medium text-[rgb(var(--foreground))] transition hover:bg-[rgb(var(--bg))] hover:text-[rgb(var(--accent))]"
+                          >
+                            <Github className="h-3.5 w-3.5 text-[rgb(var(--fg-muted))]" />
+                            <span>GitHub Profile</span>
+                          </a>
+                          <a
+                            href={content.personal.linkedin}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-xs font-medium text-[rgb(var(--foreground))] transition hover:bg-[rgb(var(--bg))] hover:text-[rgb(var(--accent))]"
+                          >
+                            <Linkedin className="h-3.5 w-3.5 text-[rgb(var(--fg-muted))]" />
+                            <span>LinkedIn Profile</span>
+                          </a>
+                        </motion.div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
           </div>
 
-          {/* Push nav to the right */}
-          <div className="ml-auto flex items-center">
-            {/* Desktop Navigation - VS Code Tab Style */}
-            <div className="hidden md:flex items-center">
-              {site.nav.map((item, index) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={handleItemClick(item.label, item.href)}
-                  className="relative group px-4 py-3 text-sm font-normal
-                             text-[#cccccc] hover:text-white
-                             bg-[#2d2d30] hover:bg-[#37373d]
-                             border-r border-[#333333] last:border-r-0
-                             transition-all duration-200
-                             first:rounded-tl-md last:rounded-tr-md"
-                  onMouseEnter={() => setActiveTab(item.label)}
-                  onMouseLeave={() => setActiveTab('')}
-                >
-                  <TabIndicator isActive={activeTab === item.label} />
-                  <div className="flex items-center gap-2">
-                    {index === 0 && <Folder className="h-3.5 w-3.5 text-[#dcb67a]" />}
-                    {index === 1 && <Search className="h-3.5 w-3.5 text-[#4ec9b0]" />}
-                    {index === 2 && <Settings className="h-3.5 w-3.5 text-[#569cd6]" />}
-                    <span>{item.label}</span>
-                  </div>
-                  
-                  {/* Modified indicator */}
-                  <div className="absolute right-2 top-1/2 -translate-y-1/2 
-                                  w-1.5 h-1.5 rounded-full bg-[#007acc] opacity-0 
-                                  group-hover:opacity-100 transition-opacity duration-200" />
-                </a>
-              ))}
-            </div>
-
-            {/* Mobile menu button */}
-            <button
-              className="md:hidden ml-4 p-2 rounded text-[#cccccc] hover:text-white 
-                         hover:bg-[#37373d] border border-[#333333] hover:border-[#007acc]
-                         transition-all duration-200"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
+          {/* Right Action: Get in Touch & Theme Toggle */}
+          <div className="hidden items-center gap-3 md:flex">
+            <ThemeToggle />
+            <a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
+              className="inline-flex items-center gap-1.5 rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--bg-elevated))] px-3.5 py-1.5 text-xs font-semibold text-[rgb(var(--foreground))] transition hover:border-[rgb(var(--accent))] hover:text-[rgb(var(--accent))]"
             >
-              <div className="relative h-5 w-5">
-                <Menu
-                  className={`absolute inset-0 transition-all duration-300 ${
-                    isOpen ? 'opacity-0 rotate-90 scale-75' : 'opacity-100 rotate-0 scale-100'
-                  }`}
-                />
-                <X
-                  className={`absolute inset-0 transition-all duration-300 ${
-                    isOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-75'
-                  }`}
-                />
-              </div>
+              <Mail className="h-3.5 w-3.5" />
+              <span>Contact</span>
+            </a>
+          </div>
+
+          {/* Mobile Actions: ThemeToggle + Hamburger */}
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <button
+              type="button"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[rgb(var(--border))] bg-[rgb(var(--bg-elevated))] text-[rgb(var(--foreground))]"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile Navigation */}
-        <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
-            isOpen 
-              ? 'max-h-96 opacity-100 translate-y-0' 
-              : 'max-h-0 opacity-0 -translate-y-2'
-          }`}
-        >
-          <div className="border-t border-[#333333] bg-[#252526] rounded-b-md">
-            {site.nav.map((item, i) => (
+      {/* Mobile Drawer Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed inset-0 z-40 flex flex-col bg-[rgb(var(--background))]/95 px-6 pt-20 pb-8 backdrop-blur-2xl md:hidden overflow-y-auto"
+          >
+            <nav className="flex flex-col divide-y divide-[rgb(var(--border))]">
               <a
-                key={item.href}
-                href={item.href}
-                onClick={handleItemClick(item.label, item.href)}
-                className="flex items-center justify-between px-4 py-3 
-                           text-[#cccccc] hover:text-white hover:bg-[#37373d]
-                           border-b border-[#2d2d30] last:border-b-0
-                           transition-all duration-200 font-mono text-sm
-                           animate-in slide-in-from-top-1 fade-in"
-                style={{ 
-                  animationDelay: `${i * 0.1}s`, 
-                  animationFillMode: 'both',
-                  animationDuration: '0.4s'
-                }}
+                href="#about"
+                onClick={(e) => handleNavClick(e, "#about")}
+                className="py-4 text-lg font-medium text-[rgb(var(--foreground))]"
               >
-                <div className="flex items-center gap-3">
-                  {i === 0 && <Folder className="h-4 w-4 text-[#dcb67a]" />}
-                  {i === 1 && <Search className="h-4 w-4 text-[#4ec9b0]" />}
-                  {i === 2 && <Settings className="h-4 w-4 text-[#569cd6]" />}
-                  <span>{item.label}</span>
-                </div>
-                <span className="text-[#007acc] opacity-60 group-hover:opacity-100 
-                               transition-opacity duration-200">
-                  {'>' }
-                </span>
+                About
               </a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
-}
 
-/* ============================================================================
- * PROFESSIONAL VS CODE NAVBAR (alternative variant)
- * ==========================================================================*/
-interface NavItem {
-  label: string;
-  href: string;
-  children?: NavItem[];
-  external?: boolean;
-}
-
-interface ProfessionalNavbarProps {
-  brand?: string;
-  items?: NavItem[];
-  showCTA?: boolean;
-  ctaText?: string;
-  ctaHref?: string;
-  variant?: 'default' | 'minimal' | 'centered';
-}
-
-export function ProfessionalNavbar({
-  brand,
-  items,
-  showCTA = false,
-  ctaText = 'Deploy',
-  ctaHref = '#contact',
-  variant = 'default',
-}: ProfessionalNavbarProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeTab, setActiveTab] = useState('');
-
-  useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  const navItems = items || site.nav || [];
-  const brandName = brand || site.name?.split(' ')[0] || 'Code';
-
-  const base = 'fixed top-0 left-0 right-0 z-50 transition-all duration-300';
-  const skin = isScrolled
-    ? 'bg-[#1e1e1e] border-b border-[#333333] shadow-[0_2px_8px_rgba(0,0,0,0.8)]'
-    : 'bg-[#1e1e1e]/95 border-b border-[#2d2d30] shadow-[0_1px_3px_rgba(0,0,0,0.5)]';
-
-  const isAbout = (label: string) =>
-    label.toLowerCase() === 'about' || label.toLowerCase().includes('about me');
-
-  const handleItemClick = (label: string, href: string) => (e: React.MouseEvent) => {
-    setActiveTab(label);
-    
-    if (isAbout(label)) {
-      e.preventDefault();
-      const target = document.querySelector('#terminal');
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      document.dispatchEvent(new CustomEvent('terminal:run'));
-      setIsOpen(false);
-      return;
-    }
-    setIsOpen(false);
-  };
-
-  return (
-    <nav className={`${base} ${skin}`}>
-      {variant !== 'centered' && (
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
-          <VSCodeDots />
-        </div>
-      )}
-
-      <div className="mx-auto max-w-7xl px-4">
-        <div className={`flex h-12 items-center ${
-          variant === 'centered' ? 'justify-center' : 'w-full'
-        }`}>
-          
-          {variant !== 'centered' && (
-            <>
-              <div className="flex items-center ml-20">
-                <VSCodeBrand text={brandName} />
-              </div>
-
-              <div className="ml-auto hidden md:flex items-center">
-                {navItems.map((item, index) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    onClick={handleItemClick(item.label, item.href)}
-                    className="relative group px-4 py-3 text-sm font-normal
-                               text-[#cccccc] hover:text-white
-                               bg-[#2d2d30] hover:bg-[#37373d]
-                               border-r border-[#333333] last:border-r-0
-                               transition-all duration-200
-                               first:rounded-tl-md last:rounded-tr-md"
-                    onMouseEnter={() => setActiveTab(item.label)}
-                    onMouseLeave={() => setActiveTab('')}
-                  >
-                    <TabIndicator isActive={activeTab === item.label} />
-                    <span>{item.label}</span>
-                    <div className="absolute right-2 top-1/2 -translate-y-1/2 
-                                    w-1.5 h-1.5 rounded-full bg-[#007acc] opacity-0 
-                                    group-hover:opacity-100 transition-opacity duration-200" />
-                  </a>
-                ))}
-
-                {showCTA && (
-                  <button className="ml-4 px-4 py-2 bg-[#007acc] hover:bg-[#1177bb] 
-                                   text-white text-sm font-medium rounded
-                                   transition-all duration-200 hover:shadow-lg
-                                   hover:shadow-[#007acc]/20">
-                    {ctaText}
-                  </button>
+              {/* Mobile Work with Expand */}
+              <div className="py-4">
+                <button
+                  type="button"
+                  onClick={() => setMobileWorkExpanded(!mobileWorkExpanded)}
+                  className="flex w-full items-center justify-between text-lg font-medium text-[rgb(var(--foreground))]"
+                >
+                  <span>Work</span>
+                  <ChevronDown
+                    className={cn("h-4 w-4 transition-transform", mobileWorkExpanded && "rotate-180")}
+                  />
+                </button>
+                {mobileWorkExpanded && (
+                  <div className="mt-3 space-y-2 pl-3">
+                    {content.featuredProjects.map((p) => (
+                      <a
+                        key={p.title}
+                        href={p.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="block rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--bg-elevated))] p-2.5 text-sm font-medium text-[rgb(var(--foreground))]"
+                      >
+                        <div className="text-xs font-semibold text-[rgb(var(--accent))]">{p.title}</div>
+                        <div className="text-[11px] text-[rgb(var(--fg-muted))]">{p.tagline}</div>
+                      </a>
+                    ))}
+                    <a
+                      href="#work"
+                      onClick={(e) => handleNavClick(e, "#work")}
+                      className="block text-xs font-medium text-[rgb(var(--accent))] pt-1"
+                    >
+                      View all projects →
+                    </a>
+                  </div>
                 )}
               </div>
 
-              <button
-                className="md:hidden ml-auto p-2 rounded text-[#cccccc] hover:text-white 
-                           hover:bg-[#37373d] border border-[#333333] hover:border-[#007acc]
-                           transition-all duration-200"
-                onClick={() => setIsOpen(!isOpen)}
-                aria-label="Toggle menu"
-              >
-                <div className="relative h-5 w-5">
-                  <Menu
-                    className={`absolute inset-0 transition-all duration-300 ${
-                      isOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'
-                    }`}
-                  />
-                  <X
-                    className={`absolute inset-0 transition-all duration-300 ${
-                      isOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'
-                    }`}
-                  />
-                </div>
-              </button>
-            </>
-          )}
-        </div>
-
-        <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
-            isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-          }`}
-        >
-          <div className="border-t border-[#333333] bg-[#252526] rounded-b-md">
-            {navItems.map((item, i) => (
               <a
-                key={item.href}
-                href={item.href}
-                onClick={handleItemClick(item.label, item.href)}
-                className="flex items-center justify-between px-4 py-3 
-                           text-[#cccccc] hover:text-white hover:bg-[#37373d]
-                           border-b border-[#2d2d30] last:border-b-0
-                           transition-all duration-200 font-mono text-sm"
+                href="#skills"
+                onClick={(e) => handleNavClick(e, "#skills")}
+                className="py-4 text-lg font-medium text-[rgb(var(--foreground))]"
               >
-                <span>{item.label}</span>
-                <span className="text-[#007acc]">{'>'}</span>
+                Skills
               </a>
-            ))}
-            
-            {showCTA && (
-              <div className="p-4 border-t border-[#333333]">
-                <button className="w-full px-4 py-2 bg-[#007acc] hover:bg-[#1177bb] 
-                                 text-white text-sm font-medium rounded
-                                 transition-colors duration-200">
-                  {ctaText}
+
+              <a
+                href="#experience"
+                onClick={(e) => handleNavClick(e, "#experience")}
+                className="py-4 text-lg font-medium text-[rgb(var(--foreground))]"
+              >
+                Experience
+              </a>
+
+              {/* Mobile Connect with Expand */}
+              <div className="py-4">
+                <button
+                  type="button"
+                  onClick={() => setMobileConnectExpanded(!mobileConnectExpanded)}
+                  className="flex w-full items-center justify-between text-lg font-medium text-[rgb(var(--foreground))]"
+                >
+                  <span>Connect</span>
+                  <ChevronDown
+                    className={cn("h-4 w-4 transition-transform", mobileConnectExpanded && "rotate-180")}
+                  />
                 </button>
+                {mobileConnectExpanded && (
+                  <div className="mt-3 space-y-2 pl-3">
+                    <a
+                      href={`mailto:${content.personal.email}`}
+                      className="flex items-center gap-2 text-sm text-[rgb(var(--foreground))]"
+                    >
+                      <Mail className="h-4 w-4 text-[rgb(var(--accent))]" />
+                      <span>{content.personal.email}</span>
+                    </a>
+                    <a
+                      href={content.personal.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-2 text-sm text-[rgb(var(--foreground))]"
+                    >
+                      <Github className="h-4 w-4 text-[rgb(var(--accent))]" />
+                      <span>GitHub</span>
+                    </a>
+                    <a
+                      href={content.personal.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-2 text-sm text-[rgb(var(--foreground))]"
+                    >
+                      <Linkedin className="h-4 w-4 text-[rgb(var(--accent))]" />
+                      <span>LinkedIn</span>
+                    </a>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </nav>
+            </nav>
+
+            <div className="mt-auto pt-6 flex flex-col gap-3">
+              <a
+                href="#contact"
+                onClick={(e) => handleNavClick(e, "#contact")}
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[rgb(var(--foreground))] py-3 text-sm font-semibold text-[rgb(var(--background))]"
+              >
+                <Mail className="h-4 w-4" />
+                Get in Touch
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

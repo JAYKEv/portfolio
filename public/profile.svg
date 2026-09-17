@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="avatarBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="50%" stop-color="#152238" />
+      <stop offset="100%" stop-color="#0b1120" />
+    </linearGradient>
+    <linearGradient id="neonGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+    <filter id="blurGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="20" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="600" height="600" rx="24" fill="url(#avatarBg)" />
+
+  <!-- Ambient background lighting -->
+  <circle cx="300" cy="220" r="160" fill="#38bdf8" opacity="0.15" filter="url(#blurGlow)" />
+  <circle cx="380" cy="380" r="140" fill="#818cf8" opacity="0.12" filter="url(#blurGlow)" />
+
+  <!-- Subtle Coordinate Rings -->
+  <circle cx="300" cy="300" r="220" fill="none" stroke="#334155" stroke-width="1" stroke-dasharray="6,6" opacity="0.4" />
+  <circle cx="300" cy="300" r="170" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0.2" />
+
+  <!-- Developer Silhouette / Monogram Geometric Emblem -->
+  <g transform="translate(300, 260)">
+    <!-- Stylized Head / Core -->
+    <circle cx="0" cy="-60" r="54" fill="#1e293b" stroke="url(#neonGlow)" stroke-width="2.5" />
+    
+    <!-- Torso / Structural Frame -->
+    <path d="M -110 130 C -100 30, -50 0, 0 0 C 50 0, 100 30, 110 130 Z" fill="#1e293b" stroke="url(#neonGlow)" stroke-width="2" />
+    
+    <!-- Circuit lines inside avatar -->
+    <path d="M 0 -60 L 0 50 M -35 30 L 35 30 M -60 80 L 60 80" stroke="#38bdf8" stroke-width="1.5" opacity="0.6" />
+    <circle cx="0" cy="30" r="4" fill="#38bdf8" />
+    <circle cx="-35" cy="30" r="3" fill="#38bdf8" />
+    <circle cx="35" cy="30" r="3" fill="#38bdf8" />
+  </g>
+
+  <!-- High-Tech Badge Overlay -->
+  <g transform="translate(300, 490)">
+    <rect x="-140" y="-24" width="280" height="48" rx="24" fill="#0f172a" stroke="#334155" stroke-width="1.5" />
+    <text x="0" y="6" fill="#f8fafc" font-family="monospace" font-size="14" font-weight="600" text-anchor="middle" letter-spacing="2">JAYKUMAR KEVADIYA</text>
+  </g>
+</svg>

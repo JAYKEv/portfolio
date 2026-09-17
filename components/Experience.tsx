@@ -1,466 +1,155 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Briefcase, Calendar, MapPin, Code, GitBranch, FileText, GraduationCap, Star, ChevronRight, Terminal } from 'lucide-react';
+import React, { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { Briefcase, Building2, Calendar, CheckCircle2, GraduationCap, MapPin } from "lucide-react";
+import { content } from "@/lib/content";
+import { durations, easeOut, fadeUp } from "@/lib/motion";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
-/* ---------- Types ---------- */
-export type ExperienceItem = {
-  company: string;
-  role: string;
-  location: string;
-  start: string;
-  end: string;
-  bullets?: string[];
-};
+export function Experience() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
-export type EducationItem = {
-  school: string;
-  degree: string;
-  start: string;
-  end: string;
-  gpa: string;
-  location: string;
-};
+  // Vertical line draw animation
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 80%", "end 60%"],
+  });
 
-interface ExperienceCardsProps {
-  items?: ExperienceItem[];
-  education?: EducationItem[];
-  title?: string;
-  subtitle?: string;
-  className?: string;
-}
-
-/* ---------- Defaults ---------- */
-const defaults: ExperienceItem[] = [
-  {
-    company: 'Delta Tech-Up Ltd',
-    role: 'Software Engineer — Node.js, Python, MongoDB',
-    location: 'Ahmedabad, India',
-    start: 'Jan 2023',
-    end: 'Jun 2024',
-    bullets: [
-      'Designed scalable backend services using Node.js and Python, improving system performance by 35% and reducing request failures.',
-      'Refactored REST APIs and GraphQL resolvers and optimized MongoDB, reducing API latency by 45%.',
-      'Implemented structured logging, role-based access control, and automated testing, enhancing reliability and security.',
-      'Developed full-stack web applications with React, Node.js, and MongoDB, ensuring seamless integration.'
-    ],
-  },
-  {
-    company: 'Kintu Designs Pvt Ltd',
-    role: 'Frontend Developer Intern — React, WebSockets',
-    location: 'Surat, India',
-    start: 'May 2022',
-    end: 'Jul 2022',
-    bullets: [
-      'Built real-time collaborative UI features using React and WebSockets, improving live update responsiveness by 30%.',
-      'Developed reusable React components and performed unit testing, reducing frontend defects.',
-      'Participated in Agile sprints, code reviews, and deployment cycles using Git, enhancing delivery stability.'
-    ],
-  },
-]; // Experience data matching resume
-
-const defaultEducation: EducationItem[] = [
-  {
-    school: 'University of Windsor',
-    degree: "Master of Applied Computing",
-    start: 'Sep 2024',
-    end: 'Dec 2025',
-    gpa: '',
-    location: 'Ontario, Canada',
-  },
-  {
-    school: 'Charotar University of Science and Technology',
-    degree: 'B.Tech in Computer Science Engineering',
-    start: 'Jun 2019',
-    end: 'Apr 2023',
-    gpa: '',
-    location: 'Anand, India',
-  },
-];
-
-/* ---------- VS Code UI Components ---------- */
-function VSCodeSeparator() {
-  return <div className="h-px bg-[#333333] opacity-60" />;
-}
-
-function FileTab({ 
-  title, 
-  isActive = false, 
-  hasUnsavedChanges = false 
-}: { 
-  title: string; 
-  isActive?: boolean; 
-  hasUnsavedChanges?: boolean;
-}) {
-  return (
-    <div className={`relative flex items-center gap-2 px-4 py-2 text-sm font-mono
-                    border-r border-[#333333] transition-all duration-200
-                    ${isActive 
-                      ? 'bg-[#1e1e1e] text-[#cccccc] border-t-2 border-t-[#007acc]' 
-                      : 'bg-[#2d2d30] text-[#969696] hover:text-[#cccccc] hover:bg-[#37373d]'
-                    }`}>
-      <FileText className="h-3.5 w-3.5 text-[#dcb67a]" />
-      <span>{title}</span>
-      {hasUnsavedChanges && (
-        <div className="w-1.5 h-1.5 rounded-full bg-[#007acc]" />
-      )}
-    </div>
-  );
-}
-
-function CodeLineNumbers({ lines }: { lines: number }) {
-  return (
-    <div className="flex flex-col text-[#858585] text-xs font-mono leading-5 pr-3 border-r border-[#333333] select-none">
-      {Array.from({ length: lines }, (_, i) => (
-        <span key={i} className="text-right w-6">
-          {i + 1}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function StatusBar({ fileName, language }: { fileName: string; language: string }) {
-  return (
-    <div className="flex items-center justify-between px-4 py-1 bg-[#007acc] text-white text-xs font-mono">
-      <div className="flex items-center gap-4">
-        <span>📄 {fileName}</span>
-        <span>🔗 Git: main</span>
-      </div>
-      <div className="flex items-center gap-4">
-        <span>{language}</span>
-        <span>UTF-8</span>
-        <span>LF</span>
-      </div>
-    </div>
-  );
-}
-
-/* ---------- Enhanced Experience Card ---------- */
-function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isInView, setIsInView] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsInView(true), index * 200);
-    return () => clearTimeout(timer);
-  }, [index]);
-
-  const totalBullets = item.bullets?.length || 3; // Default lines for animation
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   return (
-    <article
-      className={`group relative rounded-lg border border-[#333333] bg-[#252526] 
-                 overflow-hidden transition-all duration-500 hover:border-[#007acc]/50
-                 hover:shadow-[0_4px_20px_rgba(0,122,204,0.1)]
-                 ${isInView 
-                   ? 'opacity-100 translate-y-0' 
-                   : 'opacity-0 translate-y-8'
-                 }`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{ transitionDelay: `${index * 100}ms` }}
-    >
-      {/* VS Code Tab Bar */}
-      <div className="flex bg-[#2d2d30] border-b border-[#333333]">
-        <FileTab 
-          title={`${item.company.toLowerCase().replace(/\s+/g, '-')}.tsx`}
-          isActive={true}
-          hasUnsavedChanges={isHovered}
-        />
-        <div className="flex-1 bg-[#37373d]"></div>
-      </div>
-
-      {/* Code Editor Content */}
-      <div className="flex">
-        {/* Line Numbers */}
-        <div className="bg-[#1e1e1e] py-4 pl-4">
-          <CodeLineNumbers lines={totalBullets + 4} />
-        </div>
-
-        {/* Main Content */}
-        <div className="flex-1 p-4 bg-[#1e1e1e] font-mono text-sm">
-          {/* Company Header */}
-          <div className="flex items-center gap-2 mb-3">
-            <div className={`w-8 h-8 rounded border border-[#333333] bg-[#2d2d30] 
-                          flex items-center justify-center transition-all duration-300
-                          ${isHovered ? 'bg-[#007acc] border-[#007acc]' : ''}`}>
-              <Briefcase className={`h-4 w-4 transition-colors duration-300 
-                                   ${isHovered ? 'text-white' : 'text-[#cccccc]'}`} />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-2">
-                <span className="text-[#4ec9b0]">const</span>
-                <span className="text-[#9cdcfe]">role</span>
-                <span className="text-[#cccccc]">=</span>
-                <span className="text-[#ce9178]">"{item.role}"</span>
-                <span className="text-[#cccccc]">;</span>
-              </div>
-              <div className="flex items-center gap-2 mt-1">
-                <span className="text-[#4ec9b0]">const</span>
-                <span className="text-[#9cdcfe]">company</span>
-                <span className="text-[#cccccc]">=</span>
-                <span className="text-[#ce9178]">"{item.company}"</span>
-                <span className="text-[#cccccc]">;</span>
-              </div>
-            </div>
+    <section id="experience" className="relative px-5 py-20 md:px-8 md:py-28 overflow-hidden">
+      <div className="mx-auto max-w-site">
+        {/* Section Header */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeUp}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-label text-[rgb(var(--fg-muted))]">
+            <span className="text-[rgb(var(--accent))]">05</span>
+            <span>{"//"}</span>
+            <span>Experience &amp; Education</span>
           </div>
-
-          {/* Metadata */}
-          <div className="mb-4 text-[#6a9955]">
-            <div className="flex items-center gap-2">
-              <span className="text-[#6a9955]">//</span>
-              <Calendar className="h-3 w-3" />
-              <span>{item.start} – {item.end}</span>
-            </div>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="text-[#6a9955]">//</span>
-              <MapPin className="h-3 w-3" />
-              <span>{item.location}</span>
-            </div>
-          </div>
-
-          {/* Responsibilities/Bullets */}
-          {item.bullets && item.bullets.length > 0 ? (
-            <div className="space-y-1">
-              <div className="text-[#cccccc] mb-2">
-                <span className="text-[#4ec9b0]">const</span>
-                <span className="text-[#cccccc]"> </span>
-                <span className="text-[#9cdcfe]">responsibilities</span>
-                <span className="text-[#cccccc]"> = [</span>
-              </div>
-              {item.bullets.map((bullet, i) => {
-                // Highlight metrics (percentages, numbers with +, sub-Xms)
-                const parts = bullet.split(/(\d+%|\d+\+|sub-\d+ms)/g);
-                
-                return (
-                  <div 
-                    key={`${item.company}-bullet-${i}`}
-                    className="flex items-start gap-2 ml-4 text-[#ce9178]"
-                    style={{ display: 'flex' }}
-                  >
-                    <span className="mt-0.5">"</span>
-                    <span className="flex-1 leading-relaxed">
-                      {parts.map((part, idx) => 
-                        /^\d+%$|^\d+\+$|^sub-\d+ms$/.test(part) ? (
-                          <strong key={idx} className="text-[#4ec9b0] font-bold">{part}</strong>
-                        ) : (
-                          <span key={idx}>{part}</span>
-                        )
-                      )}
-                    </span>
-                    <span>",</span>
-                  </div>
-                );
-              })}
-              <div className="text-[#cccccc]">];</div>
-            </div>
-          ) : null}
-
-          {/* Hover Effect: Terminal-style prompt */}
-          <div className={`mt-4 transition-all duration-300 ${
-            isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-          }`}>
-            <div className="flex items-center gap-2 text-xs text-[#569cd6]">
-              <Terminal className="h-3 w-3" />
-              <span className="font-mono">experience.compile() → </span>
-              <span className="text-[#4ec9b0]">Success</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Status Bar */}
-      <StatusBar 
-        fileName={`${item.company.toLowerCase().replace(/\s+/g, '-')}.tsx`}
-        language="TypeScript React"
-      />
-
-      {/* Animated Border */}
-      <div className={`absolute inset-0 rounded-lg border-2 border-[#007acc] opacity-0 
-                      transition-opacity duration-300 pointer-events-none
-                      ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
-    </article>
-  );
-}
-
-/* ---------- Enhanced Education Section ---------- */
-function EducationSection({ items }: { items: EducationItem[] }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  return (
-    <div className="mt-20">
-      {/* Section Header */}
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-3 px-6 py-3 bg-[#252526] 
-                       border border-[#333333] rounded-lg mb-4">
-          <GraduationCap className="h-6 w-6 text-[#569cd6]" />
-          <span className="text-2xl font-bold text-[#cccccc] font-mono">
-            Education.json
-          </span>
-        </div>
-        <p className="text-[#969696] text-sm font-mono">
-          // Academic journey and qualifications
-        </p>
-      </div>
-
-      {/* Education Cards */}
-      <div className="mx-auto max-w-4xl">
-        <VSCodeSeparator />
-        
-        <div className="mt-8 space-y-6">
-          {items.map((edu, index) => (
-            <div 
-              key={`${edu.school}-${edu.degree}`}
-              className="group relative bg-[#252526] border border-[#333333] rounded-lg p-6
-                         hover:border-[#007acc]/50 transition-all duration-300
-                         hover:shadow-[0_4px_16px_rgba(0,122,204,0.1)]
-                         animate-in slide-in-from-bottom-4 fade-in"
-              style={{ animationDelay: `${index * 150}ms` }}
-              onMouseEnter={() => setActiveIndex(index)}
-            >
-              {/* VS Code File Tab */}
-              <div className="flex items-center gap-2 mb-4 pb-2 border-b border-[#333333]">
-                <FileText className="h-4 w-4 text-[#dcb67a]" />
-                <span className="text-sm font-mono text-[#cccccc]">
-                  {edu.school.toLowerCase().replace(/\s+/g, '-')}.edu
-                </span>
-                <div className={`ml-auto transition-all duration-300 ${
-                  activeIndex === index ? 'opacity-100' : 'opacity-0'
-                }`}>
-                  <div className="flex items-center gap-2 text-xs text-[#007acc]">
-                    <GitBranch className="h-3 w-3" />
-                    <span>main</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Education Content */}
-              <div className="font-mono text-sm space-y-2">
-                <div className="flex items-start gap-2">
-                  <span className="text-[#6a9955]">//</span>
-                  <span className="text-[#cccccc] font-semibold">{edu.school}</span>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <span className="text-[#4ec9b0]">degree:</span>
-                  <span className="text-[#ce9178]">"{edu.degree}"</span>
-                  <span className="text-[#cccccc]">,</span>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <span className="text-[#4ec9b0]">duration:</span>
-                  <span className="text-[#ce9178]">"{edu.start} – {edu.end}"</span>
-                  <span className="text-[#cccccc]">,</span>
-                </div>
-                
-                {edu.gpa && (
-                  <div className="flex items-center gap-2">
-                    <span className="text-[#4ec9b0]">gpa:</span>
-                    <span className="text-[#b5cea8]">{edu.gpa}</span>
-                    <span className="text-[#cccccc]">,</span>
-                    <div className="flex items-center gap-1 ml-2">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star 
-                          key={i} 
-                          className={`h-3 w-3 ${
-                            i < Math.floor(parseFloat(edu.gpa)) 
-                              ? 'text-[#ffd700] fill-current' 
-                              : 'text-[#333333]'
-                          }`} 
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                <div className="flex items-center gap-2">
-                  <span className="text-[#4ec9b0]">location:</span>
-                  <span className="text-[#ce9178]">"{edu.location}"</span>
-                </div>
-              </div>
-
-              {/* Progress Indicator */}
-              <div className={`mt-4 flex items-center gap-2 transition-all duration-300 ${
-                activeIndex === index ? 'opacity-100' : 'opacity-60'
-              }`}>
-                <div className="h-1 bg-[#333333] rounded flex-1 overflow-hidden">
-                  <div className={`h-full bg-[#007acc] rounded transition-all duration-1000 ${
-                    activeIndex === index ? 'w-full' : 'w-0'
-                  }`} />
-                </div>
-                <ChevronRight className="h-4 w-4 text-[#007acc]" />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ---------- Main Component ---------- */
-export default function ExperienceCards({
-  items = defaults,
-  education = defaultEducation,
-  title = 'Experience',
-  subtitle = "A quick look at where I've built and shipped.",
-  className = '',
-}: ExperienceCardsProps) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <section className={`relative py-20 px-4 bg-[#1a1a1a] ${className}`}>
-      <div className="mx-auto max-w-7xl">
-        {/* Header Section */}
-        <div className={`text-center mb-16 transition-all duration-800 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          <div className="inline-flex items-center gap-3 px-8 py-4 bg-[#252526] 
-                         border border-[#333333] rounded-xl mb-6 
-                         shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
-            <Code className="h-8 w-8 text-[#007acc]" />
-            <h2 className="text-4xl font-bold text-[#cccccc] font-mono">
-              {title}.ts
-            </h2>
-          </div>
-          <p className="text-[#969696] text-lg font-mono max-w-2xl mx-auto">
-            <span className="text-[#6a9955]">// </span>
-            {subtitle}
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-[rgb(var(--foreground))] md:text-4xl">
+            Career Timeline &amp; Academic Journey
+          </h2>
+          <p className="mt-3 max-w-xl text-sm md:text-base text-[rgb(var(--fg-muted))]">
+            Proven track record in high-throughput backend services, distributed systems, and real-time collaboration platforms.
           </p>
+        </motion.div>
+
+        {/* Timeline Container */}
+        <div ref={containerRef} className="relative pl-6 md:pl-10">
+          {/* Static Background Track Line */}
+          <div className="absolute left-[11px] top-3 bottom-3 w-[2px] bg-[rgb(var(--border))] md:left-[19px]" />
+
+          {/* Animated Dynamic Scroll Indicator Line */}
+          {!prefersReducedMotion && (
+            <motion.div
+              style={{ scaleY, transformOrigin: "top" }}
+              className="absolute left-[11px] top-3 bottom-3 w-[2px] bg-gradient-to-b from-[rgb(var(--accent))] via-[rgb(var(--accent))] to-transparent md:left-[19px]"
+            />
+          )}
+
+          {/* Timeline Nodes */}
+          <div className="space-y-12">
+            {content.experience.map((item, idx) => {
+              const isWork = item.type === "work";
+              const Icon = isWork ? Briefcase : GraduationCap;
+
+              return (
+                <motion.div
+                  key={`${item.organization}-${item.roleOrDegree}`}
+                  initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{
+                    duration: prefersReducedMotion ? 0.01 : durations.base,
+                    delay: prefersReducedMotion ? 0 : idx * 0.1,
+                    ease: easeOut,
+                  }}
+                  className="relative group"
+                >
+                  {/* Timeline Dot Icon */}
+                  <div className="absolute -left-[30px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-[rgb(var(--bg))] bg-[rgb(var(--bg-elevated))] text-[rgb(var(--accent))] shadow-sm transition-transform duration-300 group-hover:scale-125 md:-left-[38px] md:h-8 md:w-8">
+                    <Icon className="h-3 w-3 md:h-4 md:w-4" />
+                  </div>
+
+                  {/* Card Body */}
+                  <div className="rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--bg-elevated))] p-6 shadow-sm transition-all duration-300 group-hover:border-[rgb(var(--border-hover))] group-hover:shadow-[0_16px_40px_rgba(0,0,0,0.06)] md:p-8">
+                    {/* Header: Role & Organization */}
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[rgb(var(--accent))]">
+                            {isWork ? "Professional Experience" : "Academic Degree"}
+                          </span>
+                        </div>
+                        <h3 className="mt-1 text-xl font-bold tracking-tight text-[rgb(var(--foreground))] md:text-2xl">
+                          {item.roleOrDegree}
+                        </h3>
+                        <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[rgb(var(--fg-muted))]">
+                          <span className="flex items-center gap-1 font-medium text-[rgb(var(--foreground))]">
+                            <Building2 className="h-3.5 w-3.5 text-[rgb(var(--accent))]" />
+                            {item.organization}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <MapPin className="h-3.5 w-3.5" />
+                            {item.location}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Period Badge */}
+                      <div className="inline-flex items-center gap-1.5 self-start rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--bg))] px-3 py-1 font-mono text-xs font-medium text-[rgb(var(--fg-muted))] sm:self-center">
+                        <Calendar className="h-3 w-3 text-[rgb(var(--accent))]" />
+                        <span>{item.period}</span>
+                      </div>
+                    </div>
+
+                    {/* Bullet Points */}
+                    {item.bullets && item.bullets.length > 0 && (
+                      <ul className="mt-5 space-y-2.5">
+                        {item.bullets.map((bullet, bIdx) => (
+                          <li
+                            key={bIdx}
+                            className="flex items-start gap-2.5 text-xs md:text-sm leading-relaxed text-[rgb(var(--fg-muted))]"
+                          >
+                            <CheckCircle2 className="mt-1 h-3.5 w-3.5 shrink-0 text-[rgb(var(--accent))]/70" />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {/* Tech Tags */}
+                    {item.tags && item.tags.length > 0 && (
+                      <div className="mt-6 flex flex-wrap gap-1.5 pt-4 border-t border-[rgb(var(--border))]">
+                        {item.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--bg))] px-2.5 py-1 font-mono text-[11px] font-medium text-[rgb(var(--fg-muted))]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
-
-        {/* Experience Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {(items || defaults).map((item, index) => {
-            // Ensure bullets exist
-            const itemWithBullets = {
-              ...item,
-              bullets: item.bullets || []
-            };
-            return (
-              <ExperienceCard 
-                key={`${item.company}-${item.role}-${item.start}-${index}`} 
-                item={itemWithBullets} 
-                index={index}
-              />
-            );
-          })}
-        </div>
-
-        {/* Education Section */}
-        <EducationSection items={education} />
-      </div>
-
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-10 w-64 h-64 bg-[#007acc]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-10 w-64 h-64 bg-[#4ec9b0]/5 rounded-full blur-3xl" />
       </div>
     </section>
   );
